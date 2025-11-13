@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // <-- Genera un sitio estático (requerido por GitHub Pages)
+  output: 'export', // 👈 habilita el modo estático
   images: {
-    unoptimized: true, // <-- Evita errores con el sistema de optimización de imágenes
+    unoptimized: true, // 👈 desactiva la optimización (necesario para GH Pages)
   },
-  basePath: '/BeauDev', // <-- el nombre de tu repositorio
+  basePath: '/BeauDev', // 👈 nombre exacto de tu repositorio
   assetPrefix: '/BeauDev/',
 };
 

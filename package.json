@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "deploy": "npm run build && echo > docs/.nojekyll"
+    "deploy": "npm run build && npm run export && touch docs/.nojekyll"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

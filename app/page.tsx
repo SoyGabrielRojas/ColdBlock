@@ -1,10 +1,13 @@
 "use client";
 
-import type React from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { motion } from "framer-motion";
+
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+
 import {
   Sparkles,
   Code2,
@@ -20,17 +23,16 @@ import {
   Star,
   CheckCircle,
   AlertCircle,
-} from "lucide-react"
-import { motion } from "framer-motion"
-import { useState } from "react"
+} from "lucide-react";
+
 import { withBasePath } from "@/lib/publicPath";
 
 export default function Home() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
-  const [charCount, setCharCount] = useState(0)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
-  const maxChars = 1000
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [charCount, setCharCount] = useState(0);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const maxChars = 1000;
 
   const services = [
     {

@@ -1,2 +1,4 @@
-export const withBasePath = (path: string) =>
-  `${process.env.NODE_ENV === "production" ? "/BeauDev" : ""}${path}`;
+export const withBasePath = (path: string) => {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+  return `${basePath}${path}`;
+};

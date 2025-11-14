@@ -1,22 +1,8 @@
 # Hola Gaby, te explico el fix
 
-Vos en tu archivo next.config.mjs le estabas diciendo que tu path base era /BeauDev/ (para los assets y para el URL), entonces el servidor buscaba en esa carpeta (que no existe en el build) todos los assets. Tenes que eliminar en ese archivo estas 2 líneas:
-```
-  basePath: '/BeauDev', // 👈 nombre EXACTO del repo
-  assetPrefix: '/BeauDev/',
-```
+Había varios quilombos, uno de ellos era que le estabas diciendo a Next que tu build tenía que buscar los assets (las imagnes, estilos, etc) en una carpeta que no existe en el servidor de Github pages. Después había errores en como vos accedias a esos recursos en tu page.tsx y layout.tsx. Para arreglarlo y commitear desde tu pc hace lo siguiente:
+- Subi los cambios a tu repo
+- Entra al repo de github, despues a settings, despues a pages y pones en Source la opcion build from a branch
+- Depues en donde dice /(root) cambialo a la opcion /docs
 
-Una vez haces eso tenes que eliminar las carpetas de dependencias/archivos de configuracion y limpiar el cache de npm con estos comandos:
-
-```
-rmdir /s /q .next
-rmdir /s /q node_modules
-del package-lock.json
-npm cache clean --force
-```
-
-Después volves a instalar con npm o pnpm, el que quieras de esos dos pero solo con uno:
-
-```
-npm i
-```
+Cada vez

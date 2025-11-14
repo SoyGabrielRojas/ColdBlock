@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  basePath: '/BeauDev', // 👈 nombre EXACTO del repo
+  assetPrefix: '/BeauDev/',
   images: {
     unoptimized: true,
   },

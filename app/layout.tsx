@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { withBasePath } from "@/lib/publicPath";
 import "./globals.css"
 
 const playfair = Playfair_Display({
@@ -24,22 +25,14 @@ export const metadata: Metadata = {
   keywords: ["desarrollo web", "diseño web", "UX/UI", "programación", "consultora digital"],
   authors: [{ name: "BeauDev" }],
   icons: {
-    icon: [
-      {
-        url: "/images/design-mode/logo.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/images/design-mode/logo.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/images/design-mode/logo.png",
-        type: "image/png",
-      },
-    ],
-    apple: "/images/design-mode/logo.png",
-  },
+  icon: [
+    { url: withBasePath("/images/design-mode/logo.png"), media: "(prefers-color-scheme: light)" },
+    { url: withBasePath("/images/design-mode/logo.png"), media: "(prefers-color-scheme: dark)" },
+    { url: withBasePath("/images/design-mode/logo.png"), type: "image/png" },
+  ],
+  apple: withBasePath("/images/design-mode/logo.png"),
+},
+
 }
 
 export const viewport = {

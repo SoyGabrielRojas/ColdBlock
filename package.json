@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "export": "next export -o docs",
-    "deploy": "npm run build && npm run export",
-    "predeploy": "npm run export"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "export": "next export -o docs",
+  "postexport": "echo > docs/.nojekyll",
+  "deploy": "npm run build && npm run export"
+},
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.10.0",

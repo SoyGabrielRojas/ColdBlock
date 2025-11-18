@@ -137,13 +137,18 @@ export default function Home() {
       name: "Gagabi",
       role: "Full Stack Developer",
       expertise: "React, Node.js, AI Integration",
-      image: "/images/team/gagabi.jpeg",
+      images: [ // Array de imágenes para Gagabi
+        "/images/team/gagabi1.jpeg",
+        "/images/team/gagabi2.jpeg",
+        "/images/team/gagabi3.jpeg",
+        "/images/team/gagabi4.jpeg",
+      ],
     },
     {
       name: "German Estorbar",
       role: "UX/UI Designer",
       expertise: "Figma, Branding, User Research",
-      images: [ // Array de múltiples imágenes
+      images: [ // Array de imágenes para German
         "/images/team/german1.jpeg",
         "/images/team/german2.jpeg",
         "/images/team/german3.jpeg",
@@ -151,10 +156,15 @@ export default function Home() {
       ],
     },
     {
-      name: "Lihuen",
+      name: "Paul",
       role: "Backend Specialist",
       expertise: "Python, Flask, Computer Vision",
-      image: "/images/team/lihuen.jpg",
+      images: [ // Array de imágenes para Paul
+        "/images/team/paul1.jpeg",
+        "/images/team/paul2.jpeg",
+        "/images/team/paul3.jpeg",
+        "/images/team/paul4.jpeg",
+      ],
     },
   ]
 
@@ -201,42 +211,65 @@ export default function Home() {
     }
   }
 
-  // Componente de carrusel mejorado con ajuste dinámico de imágenes
-  const TeamMemberCarousel = ({ images, name, role }: { images: string[], name: string, role: string }) => {
+  // Componente de carrusel reutilizable y configurable
+  const TeamMemberCarousel = ({
+    images,
+    name,
+    role,
+    autoRotate = true,
+    rotationSpeed = 3500
+  }: {
+    images: string[],
+    name: string,
+    role: string,
+    autoRotate?: boolean,
+    rotationSpeed?: number
+  }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [imageLoading, setImageLoading] = useState(true);
 
     useEffect(() => {
+      if (!autoRotate || images.length <= 1) return;
+
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) =>
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
-      }, 3000);
+      }, rotationSpeed);
 
       return () => clearInterval(interval);
-    }, [images.length]);
+    }, [images.length, autoRotate, rotationSpeed]);
+
+    // Si solo hay una imagen, no mostramos los controles del carrusel
+    const showControls = images.length > 1;
 
     return (
       <div className="relative w-full h-full bg-beaudev-dark">
         {images.map((image, index) => (
           <div
             key={image}
-            className={`absolute inset-0 transition-opacity duration-1000 flex items-center justify-center ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
               }`}
           >
-            <Image
-              src={withBasePath(image)}
-              alt={`Foto de ${name} - ${role} ${index + 1}`}
-              width={400} // Tamaño base
-              height={500} // Tamaño base
-              className={`max-w-full max-h-full object-scale-down transition-all duration-500 ${imageLoading ? 'opacity-0' : 'opacity-100'
-                }`}
-              onLoad={() => setImageLoading(false)}
-              priority={index === 0} // Prioriza la primera imagen
-            />
+            <div className="w-full h-full flex items-center justify-center p-4">
+              <Image
+                src={withBasePath(image)}
+                alt={`Foto de ${name} - ${role} ${index + 1}`}
+                width={320}
+                height={400}
+                className={`max-w-[90%] max-h-[90%] w-auto h-auto object-scale-down transition-all duration-500 ${imageLoading ? 'opacity-0' : 'opacity-100'
+                  }`}
+                onLoad={() => setImageLoading(false)}
+                priority={index === 0}
+                style={{
+                  maxWidth: 'min(100%, 320px)',
+                  maxHeight: 'min(100%, 400px)'
+                }}
+              />
+            </div>
 
-            {/* Spinner de carga */}
-            {imageLoading && (
+            {/* Spinner de carga solo para la imagen actual */}
+            {imageLoading && index === currentImageIndex && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="w-8 h-8 border-2 border-beaudev-gold/30 border-t-beaudev-gold rounded-full animate-spin"></div>
               </div>
@@ -244,23 +277,52 @@ export default function Home() {
           </div>
         ))}
 
-        {/* Indicadores del carrusel */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {images.map((_, index) => (
+        {/* Indicadores del carrusel - solo si hay múltiples imágenes */}
+        {showControls && (
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
+                    ? 'bg-beaudev-gold scale-125'
+                    : 'bg-beaudev-gold/40'
+                  }`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImageIndex(index);
+                  setImageLoading(true);
+                }}
+                aria-label={`Ver foto ${index + 1} de ${images.length}`}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Flechas de navegación para muchos elementos */}
+        {showControls && images.length > 2 && (
+          <>
             <button
-              key={index}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
-                ? 'bg-beaudev-gold scale-125'
-                : 'bg-beaudev-gold/40'
-                }`}
+              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-beaudev-dark/70 hover:bg-beaudev-dark/90 text-beaudev-gold p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentImageIndex(index);
-                setImageLoading(true); // Reinicia el estado de carga al cambiar manualmente
+                setCurrentImageIndex(currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1);
+                setImageLoading(true);
               }}
-            />
-          ))}
-        </div>
+            >
+              <ArrowRight className="w-4 h-4 rotate-180" />
+            </button>
+            <button
+              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-beaudev-dark/70 hover:bg-beaudev-dark/90 text-beaudev-gold p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
+              onClick={(e) => {
+                e.stopPropagation();
+                setCurrentImageIndex(currentImageIndex === images.length - 1 ? 0 : currentImageIndex + 1);
+                setImageLoading(true);
+              }}
+            >
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </>
+        )}
       </div>
     );
   };
@@ -554,24 +616,18 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
                 <Card className="bg-beaudev-dark border-2 border-beaudev-gold/20 hover:border-beaudev-gold transition-all duration-300 overflow-hidden group">
-                  {/* Contenedor de imagen mejorado */}
+                  {/* Carrusel para todos los miembros que tengan imágenes */}
                   <div className="relative w-full h-80 border-b-2 border-beaudev-gold/20 overflow-hidden flex items-center justify-center bg-beaudev-dark">
-                    {member.name === "German Estorbar" && member.images ? (
-                      <TeamMemberCarousel images={member.images} name={member.name} role={member.role} />
-                    ) : member.image ? (
-                      // Imagen estática para otros miembros con el mismo ajuste
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <Image
-                          src={withBasePath(member.image)}
-                          alt={`Foto de ${member.name} - ${member.role}`}
-                          width={400}
-                          height={500}
-                          className="max-w-full max-h-full object-scale-down"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                        />
-                      </div>
+                    {member.images && member.images.length > 0 ? (
+                      <TeamMemberCarousel
+                        images={member.images}
+                        name={member.name}
+                        role={member.role}
+                        autoRotate={true} // Puedes cambiar a false si quieres rotación manual
+                        rotationSpeed={3500} // Velocidad en milisegundos
+                      />
                     ) : (
-                      // Placeholder para miembros sin imagen
+                      // Placeholder para miembros sin imágenes
                       <div className="text-center p-8">
                         <Users className="w-24 h-24 text-beaudev-gold/30 mx-auto mb-4" />
                         <p className="text-beaudev-gold/50 text-sm font-medium">Foto próximamente</p>
@@ -583,6 +639,18 @@ export default function Home() {
                     <h3 className="font-serif text-2xl font-bold text-beaudev-gold-soft mb-2">{member.name}</h3>
                     <p className="text-beaudev-gold text-lg mb-4 font-medium">{member.role}</p>
                     <p className="text-beaudev-text-light/70 text-sm leading-relaxed">{member.expertise}</p>
+
+                    {/* Indicador de múltiples imágenes */}
+                    {member.images && member.images.length > 1 && (
+                      <div className="mt-3 flex items-center justify-center">
+                        <div className="flex items-center space-x-1 bg-beaudev-gold/10 px-3 py-1 rounded-full">
+                          <Sparkles className="w-3 h-3 text-beaudev-gold" />
+                          <span className="text-beaudev-gold text-xs font-medium">
+                            {member.images.length} fotos
+                          </span>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </Card>
               </motion.div>

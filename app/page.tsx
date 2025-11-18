@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+
+import confetti from "canvas-confetti";
 
 import {
   Sparkles,
@@ -32,6 +34,9 @@ export default function Home() {
   const [charCount, setCharCount] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [showCelebration, setShowCelebration] = useState(false);
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const maxChars = 1000;
 
   const services = [
@@ -189,17 +194,26 @@ export default function Home() {
       });
 
       if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setCharCount(0);
+        setSubmitStatus("success")
+        setFormData({ name: "", email: "", message: "" })
+        setCharCount(0)
+
+        // Activar celebración
+        setShowCelebration(true)
+        triggerCelebration()
+
+        // Ocultar celebración después de 5 segundos
+        setTimeout(() => {
+          setShowCelebration(false)
+        }, 5000)
       } else {
-        setSubmitStatus("error");
+        setSubmitStatus("error")
       }
     } catch (error) {
-      console.error("Error enviando el formulario:", error);
-      setSubmitStatus("error");
+      console.error("[v0] Error submitting form:", error)
+      setSubmitStatus("error")
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
   };
 
@@ -280,8 +294,8 @@ export default function Home() {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
-                    ? 'bg-beaudev-gold scale-125'
-                    : 'bg-beaudev-gold/40'
+                  ? 'bg-beaudev-gold scale-125'
+                  : 'bg-beaudev-gold/40'
                   }`}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -295,6 +309,62 @@ export default function Home() {
         )}
       </div>
     );
+  };
+
+  const triggerCelebration = () => {
+    // Reproducir sonido de confeti
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+      audioRef.current.play().catch(e => console.log("Error reproduciendo audio:", e));
+    }
+
+    // Animación de confeti desde los costados
+    const duration = 3000;
+    const animationEnd = Date.now() + duration;
+
+    const randomInRange = (min: number, max: number) => {
+      return Math.random() * (max - min) + min;
+    };
+
+    const confettiFromSides = () => {
+      if (Date.now() > animationEnd) return;
+
+      // Confeti desde la izquierda
+      confetti({
+        particleCount: 15,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.7 },
+        startVelocity: randomInRange(45, 65),
+        colors: ['#D4AF37', '#FFD700', '#FFF8DC', '#F0E68C', '#B8860B']
+      });
+
+      // Confeti desde la derecha
+      confetti({
+        particleCount: 15,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.7 },
+        startVelocity: randomInRange(45, 65),
+        colors: ['#D4AF37', '#FFD700', '#FFF8DC', '#F0E68C', '#B8860B']
+      });
+
+      // Continuar la animación
+      requestAnimationFrame(confettiFromSides);
+    };
+
+    // Iniciar la animación
+    confettiFromSides();
+
+    // Explosión adicional central después de un breve delay
+    setTimeout(() => {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#D4AF37', '#FFD700', '#FFF8DC', '#F0E68C', '#B8860B']
+      });
+    }, 500);
   };
 
   return (
@@ -800,6 +870,68 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Celebración */}
+      {showCelebration && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+        >
+          {/* Overlay oscuro */}
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+
+          {/* Contenedor del hamster */}
+          <div className="relative z-10 flex flex-col items-center">
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 20,
+                delay: 0.2
+              }}
+              className="relative w-64 h-64 md:w-80 md:h-80"
+            >
+              <Image
+                src={withBasePath("/images/hamster.jpeg")}
+                alt="Hamster celebrando"
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </motion.div>
+
+            {/* Mensaje de éxito */}
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="text-center mt-6"
+            >
+              <motion.h3
+                className="font-serif text-3xl md:text-4xl font-bold text-beaudev-gold mb-4"
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+              >
+                ¡Mensaje Enviado!
+              </motion.h3>
+              <p className="text-beaudev-text-light text-lg md:text-xl">
+                Nos pondremos en contacto contigo pronto
+              </p>
+            </motion.div>
+          </div>
+        </motion.div>
+      )}
+
+      {/* Audio oculto */}
+      <audio
+        ref={audioRef}
+        preload="auto"
+        src={withBasePath("/audio/confeti.mp3")}
+      />
 
       {/* Footer */}
       <footer className="py-16 px-4 border-t border-beaudev-gold/20 bg-beaudev-dark">

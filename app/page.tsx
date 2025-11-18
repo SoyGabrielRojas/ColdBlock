@@ -211,36 +211,32 @@ export default function Home() {
     }
   }
 
-  // Componente de carrusel reutilizable y configurable
+  // Componente de carrusel simplificado sin flechas
   const TeamMemberCarousel = ({
     images,
     name,
-    role,
-    autoRotate = true,
-    rotationSpeed = 3500
+    role
   }: {
     images: string[],
     name: string,
-    role: string,
-    autoRotate?: boolean,
-    rotationSpeed?: number
+    role: string
   }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [imageLoading, setImageLoading] = useState(true);
 
     useEffect(() => {
-      if (!autoRotate || images.length <= 1) return;
+      if (images.length <= 1) return;
 
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) =>
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
-      }, rotationSpeed);
+      }, 3500); // Cambia cada 3.5 segundos
 
       return () => clearInterval(interval);
-    }, [images.length, autoRotate, rotationSpeed]);
+    }, [images.length]);
 
-    // Si solo hay una imagen, no mostramos los controles del carrusel
+    // Solo mostrar controles si hay más de una imagen
     const showControls = images.length > 1;
 
     return (
@@ -277,7 +273,7 @@ export default function Home() {
           </div>
         ))}
 
-        {/* Indicadores del carrusel - solo si hay múltiples imágenes */}
+        {/* Solo indicadores de puntos - sin flechas */}
         {showControls && (
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
@@ -296,32 +292,6 @@ export default function Home() {
               />
             ))}
           </div>
-        )}
-
-        {/* Flechas de navegación para muchos elementos */}
-        {showControls && images.length > 2 && (
-          <>
-            <button
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-beaudev-dark/70 hover:bg-beaudev-dark/90 text-beaudev-gold p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrentImageIndex(currentImageIndex === 0 ? images.length - 1 : currentImageIndex - 1);
-                setImageLoading(true);
-              }}
-            >
-              <ArrowRight className="w-4 h-4 rotate-180" />
-            </button>
-            <button
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-beaudev-dark/70 hover:bg-beaudev-dark/90 text-beaudev-gold p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100"
-              onClick={(e) => {
-                e.stopPropagation();
-                setCurrentImageIndex(currentImageIndex === images.length - 1 ? 0 : currentImageIndex + 1);
-                setImageLoading(true);
-              }}
-            >
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </>
         )}
       </div>
     );
@@ -616,18 +586,15 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
                 <Card className="bg-beaudev-dark border-2 border-beaudev-gold/20 hover:border-beaudev-gold transition-all duration-300 overflow-hidden group">
-                  {/* Carrusel para todos los miembros que tengan imágenes */}
+                  {/* Carrusel para todos los miembros */}
                   <div className="relative w-full h-80 border-b-2 border-beaudev-gold/20 overflow-hidden flex items-center justify-center bg-beaudev-dark">
                     {member.images && member.images.length > 0 ? (
                       <TeamMemberCarousel
                         images={member.images}
                         name={member.name}
                         role={member.role}
-                        autoRotate={true} // Puedes cambiar a false si quieres rotación manual
-                        rotationSpeed={3500} // Velocidad en milisegundos
                       />
                     ) : (
-                      // Placeholder para miembros sin imágenes
                       <div className="text-center p-8">
                         <Users className="w-24 h-24 text-beaudev-gold/30 mx-auto mb-4" />
                         <p className="text-beaudev-gold/50 text-sm font-medium">Foto próximamente</p>

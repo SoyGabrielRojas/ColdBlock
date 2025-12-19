@@ -919,11 +919,13 @@ export default function Home() {
       </section>
 
       {/* Contact Section - Hablar con ColdBlock */}
-      <section id="contact" className="py-32 px-4 relative overflow-hidden">
+      <section id="contact" className="py-20 px-4 md:py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-dark via-ColdBlock-dark-elevated/50 to-ColdBlock-dark pointer-events-none" />
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-ColdBlock-gold/10 rounded-full blur-[128px] animate-pulse pointer-events-none" />
+
+        {/* Background effects - optimizados para móvil */}
+        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-ColdBlock-gold/10 rounded-full blur-[64px] md:blur-[128px] animate-pulse pointer-events-none" />
         <div
-          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-ColdBlock-gold/5 rounded-full blur-[128px] animate-pulse pointer-events-none"
+          className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-ColdBlock-gold/5 rounded-full blur-[64px] md:blur-[128px] animate-pulse pointer-events-none"
           style={{ animationDelay: "1s" }}
         />
 
@@ -933,15 +935,14 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-12 md:mb-20"
           >
-            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-10" />
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8 text-balance">
+            <div className="w-20 md:w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-6 md:mb-10" />
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl font-bold text-ColdBlock-gold mb-6 md:mb-8 text-balance px-2">
               Llevemos la belleza al código
             </h2>
-            <p className="text-xl md:text-2xl text-ColdBlock-text-light/80 leading-relaxed max-w-3xl mx-auto">
-              Comencemos a crear algo extraordinario juntos. Completa el formulario y te responderemos en menos de 24
-              horas.
+            <p className="text-lg md:text-xl lg:text-2xl text-ColdBlock-text-light/80 leading-relaxed max-w-3xl mx-auto px-4">
+              Comencemos a crear algo extraordinario juntos. Completa el formulario y te responderemos en menos de 24 horas.
             </p>
           </motion.div>
 
@@ -952,19 +953,20 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative group"
           >
-            {/* Outer glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-ColdBlock-gold/20 via-ColdBlock-gold/10 to-ColdBlock-gold/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+            {/* Outer glow effect - reducido para móvil */}
+            <div className="absolute -inset-0.5 md:-inset-1 bg-gradient-to-r from-ColdBlock-gold/20 via-ColdBlock-gold/10 to-ColdBlock-gold/20 rounded-2xl md:rounded-3xl blur-xl md:blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
 
-            <Card className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/95 via-ColdBlock-dark/95 to-ColdBlock-dark-elevated/95 backdrop-blur-xl border-2 border-ColdBlock-gold/30 hover:border-ColdBlock-gold/60 transition-all duration-700 p-12 md:p-20 shadow-2xl shadow-ColdBlock-gold/10 rounded-3xl">
-              <form onSubmit={handleSubmit} className="space-y-12">
+            <Card className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/95 via-ColdBlock-dark/95 to-ColdBlock-dark-elevated/95 backdrop-blur-xl border-2 border-ColdBlock-gold/30 hover:border-ColdBlock-gold/60 transition-all duration-700 p-6 md:p-12 lg:p-20 shadow-xl md:shadow-2xl shadow-ColdBlock-gold/10 rounded-2xl md:rounded-3xl overflow-hidden">
+              <form onSubmit={handleSubmit} className="space-y-8 md:space-y-12">
+                {/* Name Field */}
                 <div className="group/field">
-                  <label htmlFor="name" className="flex items-center gap-3 text-ColdBlock-gold mb-4 font-bold text-xl">
-                    <div className="w-10 h-10 rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors">
-                      <User className="w-5 h-5" />
+                  <label htmlFor="name" className="flex items-center gap-3 text-ColdBlock-gold mb-3 md:mb-4 font-bold text-lg md:text-xl">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors flex-shrink-0">
+                      <User className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
-                    Tu nombre completo
+                    <span className="truncate">Tu nombre completo</span>
                   </label>
-                  <p className="text-ColdBlock-text-light/60 text-sm mb-5 ml-13 leading-relaxed">
+                  <p className="text-ColdBlock-text-light/60 text-xs md:text-sm mb-3 md:mb-5 ml-0 md:ml-13 leading-relaxed">
                     ¿Cómo debemos llamarte?
                   </p>
                   <input
@@ -973,20 +975,21 @@ export default function Home() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Ej: María González"
-                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-7 py-5 rounded-2xl transition-all duration-300 outline-none text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-5 rounded-xl md:rounded-2xl transition-all duration-300 outline-none text-base md:text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
+                {/* Email Field */}
                 <div className="group/field">
-                  <label htmlFor="email" className="flex items-center gap-3 text-ColdBlock-gold mb-4 font-bold text-xl">
-                    <div className="w-10 h-10 rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors">
-                      <Mail className="w-5 h-5" />
+                  <label htmlFor="email" className="flex items-center gap-3 text-ColdBlock-gold mb-3 md:mb-4 font-bold text-lg md:text-xl">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors flex-shrink-0">
+                      <Mail className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
-                    Email de contacto
+                    <span className="truncate">Email de contacto</span>
                   </label>
-                  <p className="text-ColdBlock-text-light/60 text-sm mb-5 ml-13 leading-relaxed">
+                  <p className="text-ColdBlock-text-light/60 text-xs md:text-sm mb-3 md:mb-5 ml-0 md:ml-13 leading-relaxed">
                     Te responderemos a esta dirección de correo
                   </p>
                   <input
@@ -995,23 +998,24 @@ export default function Home() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Ej: tu@email.com"
-                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-7 py-5 rounded-2xl transition-all duration-300 outline-none text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-5 rounded-xl md:rounded-2xl transition-all duration-300 outline-none text-base md:text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
+                {/* Message Field */}
                 <div className="group/field">
-                  <div className="flex items-center justify-between mb-4">
-                    <label htmlFor="message" className="flex items-center gap-3 text-ColdBlock-gold font-bold text-xl">
-                      <div className="w-10 h-10 rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors">
-                        <FileText className="w-5 h-5" />
+                  <div className="flex flex-col md:flex-row md:items-center justify-between mb-3 md:mb-4 gap-2 md:gap-0">
+                    <label htmlFor="message" className="flex items-center gap-3 text-ColdBlock-gold font-bold text-lg md:text-xl">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors flex-shrink-0">
+                        <FileText className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
-                      Cuéntanos sobre tu proyecto
+                      <span className="truncate">Cuéntanos sobre tu proyecto</span>
                     </label>
                     <div className="flex flex-col items-end gap-2">
-                      <div className="flex items-center gap-3">
-                        <div className="w-20 h-1.5 bg-ColdBlock-gold/20 rounded-full overflow-hidden">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="w-16 md:w-20 h-1.5 bg-ColdBlock-gold/20 rounded-full overflow-hidden">
                           <div
                             className={`h-full transition-all duration-300 ${charCount > maxChars * 0.9
                                 ? "bg-ColdBlock-gold"
@@ -1023,7 +1027,7 @@ export default function Home() {
                           />
                         </div>
                         <span
-                          className={`text-sm font-bold transition-colors ${charCount > maxChars * 0.9
+                          className={`text-xs md:text-sm font-bold transition-colors ${charCount > maxChars * 0.9
                               ? "text-ColdBlock-gold"
                               : charCount > maxChars * 0.7
                                 ? "text-ColdBlock-text-light/70"
@@ -1035,36 +1039,35 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <p className="text-ColdBlock-text-light/60 text-sm mb-5 ml-13 leading-relaxed">
-                    Describe tu idea, objetivos, presupuesto estimado y plazos esperados. Cuanto más detalle nos des,
-                    mejor podremos ayudarte a materializar tu visión.
+                  <p className="text-ColdBlock-text-light/60 text-xs md:text-sm mb-3 md:mb-5 ml-0 md:ml-13 leading-relaxed">
+                    Describe tu idea, objetivos, presupuesto estimado y plazos esperados.
                   </p>
                   <textarea
                     id="message"
                     value={formData.message}
                     onChange={handleMessageChange}
-                    rows={12}
-                    placeholder="Ej: Me gustaría crear una plataforma web moderna para mi negocio de e-commerce. Necesito un diseño elegante, sistema de pagos integrado, y panel de administración. Mi presupuesto aproximado es de..."
-                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-7 py-6 rounded-2xl transition-all duration-300 outline-none resize-none text-base leading-relaxed placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
+                    rows={8}
+                    placeholder="Ej: Me gustaría crear una plataforma web moderna para mi negocio de e-commerce..."
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-6 rounded-xl md:rounded-2xl transition-all duration-300 outline-none resize-none text-sm md:text-base leading-relaxed placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
+                {/* Status Messages */}
                 {submitStatus === "success" && (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 10 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    className="flex items-start gap-5 p-6 bg-gradient-to-br from-green-500/15 to-green-600/10 border-2 border-green-500/50 rounded-2xl shadow-lg shadow-green-500/20"
+                    className="flex items-start gap-3 md:gap-5 p-4 md:p-6 bg-gradient-to-br from-green-500/15 to-green-600/10 border-2 border-green-500/50 rounded-xl md:rounded-2xl shadow-lg shadow-green-500/20"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle className="w-7 h-7 text-green-400" />
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-5 h-5 md:w-7 md:h-7 text-green-400" />
                     </div>
-                    <div>
-                      <p className="text-green-400 font-bold text-xl mb-2">¡Mensaje enviado con éxito!</p>
-                      <p className="text-green-400/80 text-sm leading-relaxed">
-                        Hemos recibido tu solicitud. Nuestro equipo revisará tu proyecto y te responderá en menos de 24
-                        horas.
+                    <div className="flex-1 min-w-0">
+                      <p className="text-green-400 font-bold text-base md:text-xl mb-1 md:mb-2">¡Mensaje enviado con éxito!</p>
+                      <p className="text-green-400/80 text-xs md:text-sm leading-relaxed">
+                        Hemos recibido tu solicitud. Te responderemos en menos de 24 horas.
                       </p>
                     </div>
                   </motion.div>
@@ -1074,60 +1077,61 @@ export default function Home() {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 10 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
-                    className="flex items-start gap-5 p-6 bg-gradient-to-br from-red-500/15 to-red-600/10 border-2 border-red-500/50 rounded-2xl shadow-lg shadow-red-500/20"
+                    className="flex items-start gap-3 md:gap-5 p-4 md:p-6 bg-gradient-to-br from-red-500/15 to-red-600/10 border-2 border-red-500/50 rounded-xl md:rounded-2xl shadow-lg shadow-red-500/20"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
-                      <AlertCircle className="w-7 h-7 text-red-400" />
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-5 h-5 md:w-7 md:h-7 text-red-400" />
                     </div>
-                    <div>
-                      <p className="text-red-400 font-bold text-xl mb-2">Error al enviar el mensaje</p>
-                      <p className="text-red-400/80 text-sm leading-relaxed">
-                        Lo sentimos, hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente o
-                        contáctanos directamente a gabrielrojasokk@gmail.com
+                    <div className="flex-1 min-w-0">
+                      <p className="text-red-400 font-bold text-base md:text-xl mb-1 md:mb-2">Error al enviar el mensaje</p>
+                      <p className="text-red-400/80 text-xs md:text-sm leading-relaxed">
+                        Lo sentimos, hubo un problema. Intenta nuevamente o contáctanos a gabrielrojasokk@gmail.com
                       </p>
                     </div>
                   </motion.div>
                 )}
 
+                {/* Submit Button */}
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-to-r from-ColdBlock-gold via-ColdBlock-gold-soft to-ColdBlock-gold hover:from-ColdBlock-gold-soft hover:via-ColdBlock-gold hover:to-ColdBlock-gold-soft text-ColdBlock-dark font-black transition-all duration-500 text-xl py-8 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl shadow-ColdBlock-gold/40 hover:shadow-[0_20px_60px_rgba(212,175,55,0.6)] hover:scale-[1.02] active:scale-[0.98] rounded-2xl relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-ColdBlock-gold via-ColdBlock-gold-soft to-ColdBlock-gold hover:from-ColdBlock-gold-soft hover:via-ColdBlock-gold hover:to-ColdBlock-gold-soft text-ColdBlock-dark font-black transition-all duration-500 text-base md:text-xl py-6 md:py-8 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl md:shadow-2xl shadow-ColdBlock-gold/40 hover:shadow-[0_20px_60px_rgba(212,175,55,0.6)] hover:scale-[1.02] active:scale-[0.98] rounded-xl md:rounded-2xl relative overflow-hidden group"
                   disabled={isSubmitting || charCount === 0}
                 >
                   {/* Animated shine effect */}
                   <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
 
                   {/* Pulse ring effect */}
-                  <span className="absolute inset-0 rounded-2xl border-2 border-white/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+                  <span className="absolute inset-0 rounded-xl md:rounded-2xl border-2 border-white/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
 
-                  <span className="relative flex items-center justify-center gap-4">
+                  <span className="relative flex items-center justify-center gap-3 md:gap-4">
                     {isSubmitting ? (
                       <>
-                        <div className="w-7 h-7 border-4 border-ColdBlock-dark/30 border-t-ColdBlock-dark rounded-full animate-spin" />
-                        Enviando mensaje...
+                        <div className="w-5 h-5 md:w-7 md:h-7 border-3 md:border-4 border-ColdBlock-dark/30 border-t-ColdBlock-dark rounded-full animate-spin" />
+                        <span className="text-sm md:text-base">Enviando mensaje...</span>
                       </>
                     ) : (
                       <>
-                        <Mail className="w-7 h-7" />
-                        Hablar con ColdBlock
-                        <ArrowRight className="w-7 h-7 group-hover:translate-x-2 transition-transform duration-300" />
+                        <Mail className="w-5 h-5 md:w-7 md:h-7" />
+                        <span className="text-sm md:text-base">Hablar con ColdBlock</span>
+                        <ArrowRight className="w-5 h-5 md:w-7 md:h-7 group-hover:translate-x-1 md:group-hover:translate-x-2 transition-transform duration-300" />
                       </>
                     )}
                   </span>
                 </Button>
 
-                <div className="text-center pt-8 border-t-2 border-ColdBlock-gold/20">
-                  <p className="text-ColdBlock-text-light/60 text-base mb-4 font-medium">
+                {/* Direct Contact */}
+                <div className="text-center pt-6 md:pt-8 border-t-2 border-ColdBlock-gold/20">
+                  <p className="text-ColdBlock-text-light/60 text-sm md:text-base mb-3 md:mb-4 font-medium">
                     ¿Prefieres contactarnos directamente?
                   </p>
                   <a
                     href="mailto:gabrielrojasokk@gmail.com"
-                    className="inline-flex items-center gap-3 text-ColdBlock-gold hover:text-ColdBlock-gold-soft transition-all font-bold text-lg group/email bg-ColdBlock-gold/5 hover:bg-ColdBlock-gold/10 px-6 py-3 rounded-xl"
+                    className="inline-flex items-center gap-2 md:gap-3 text-ColdBlock-gold hover:text-ColdBlock-gold-soft transition-all font-bold text-sm md:text-lg group/email bg-ColdBlock-gold/5 hover:bg-ColdBlock-gold/10 px-4 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl break-all md:break-normal text-center justify-center"
                   >
-                    <Mail className="w-5 h-5" />
-                    gabrielrojasokk@gmail.com
-                    <ArrowRight className="w-5 h-5 group-hover/email:translate-x-1 transition-transform" />
+                    <Mail className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
+                    <span className="truncate">gabrielrojasokk@gmail.com</span>
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 group-hover/email:translate-x-1 transition-transform" />
                   </a>
                 </div>
               </form>

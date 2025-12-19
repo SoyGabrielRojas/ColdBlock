@@ -1119,21 +1119,6 @@ export default function Home() {
                     )}
                   </span>
                 </Button>
-
-                {/* Direct Contact */}
-                <div className="text-center pt-6 md:pt-8 border-t-2 border-ColdBlock-gold/20">
-                  <p className="text-ColdBlock-text-light/60 text-sm md:text-base mb-3 md:mb-4 font-medium">
-                    ¿Prefieres contactarnos directamente?
-                  </p>
-                  <a
-                    href="mailto:gabrielrojasokk@gmail.com"
-                    className="inline-flex items-center gap-2 md:gap-3 text-ColdBlock-gold hover:text-ColdBlock-gold-soft transition-all font-bold text-sm md:text-lg group/email bg-ColdBlock-gold/5 hover:bg-ColdBlock-gold/10 px-4 py-2 md:px-6 md:py-3 rounded-lg md:rounded-xl break-all md:break-normal text-center justify-center"
-                  >
-                    <Mail className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" />
-                    <span className="truncate">gabrielrojasokk@gmail.com</span>
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 flex-shrink-0 group-hover/email:translate-x-1 transition-transform" />
-                  </a>
-                </div>
               </form>
             </Card>
           </motion.div>

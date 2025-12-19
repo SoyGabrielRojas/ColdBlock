@@ -25,6 +25,9 @@ import {
   Star,
   CheckCircle,
   AlertCircle,
+  Rocket,
+  FileText,
+  User,
 } from "lucide-react";
 
 import { withBasePath } from "@/lib/publicPath";
@@ -55,16 +58,6 @@ export default function Home() {
       icon: Brain,
       title: "Integraciones con IA y Visión Computacional",
       description: "Implementamos soluciones inteligentes con análisis de imágenes y aprendizaje automático.",
-    },
-    {
-      icon: Eye,
-      title: "Consultoría Estética para Interfaces",
-      description: "Optimizamos la belleza visual de tus productos digitales sin comprometer la funcionalidad.",
-    },
-    {
-      icon: Sparkles,
-      title: "Auditorías de Belleza Funcional",
-      description: "Evaluamos y mejoramos el equilibrio perfecto entre estética, usabilidad y rendimiento.",
     },
     {
       icon: Zap,
@@ -107,7 +100,7 @@ export default function Home() {
   ]
 
   const philosophy = [
-    { icon: Sparkles, label: "Belleza" },
+    { icon: Sparkles, label: "Elegancia" },
     { icon: Users, label: "Usabilidad" },
     { icon: Zap, label: "Tecnología" },
     { icon: Layers, label: "Escalabilidad" },
@@ -116,7 +109,7 @@ export default function Home() {
   const testimonials = [
     {
       quote:
-        "BeauDev transformó nuestra visión en una realidad digital que supera todas nuestras expectativas. El equipo demostró un nivel de profesionalismo excepcional.",
+        "ColdBlock transformó nuestra visión en una realidad digital que supera todas nuestras expectativas. El equipo demostró un nivel de profesionalismo excepcional.",
       author: "María González",
       role: "CEO, Luxe Brands",
       rating: 5,
@@ -130,7 +123,7 @@ export default function Home() {
     },
     {
       quote:
-        "Increíble experiencia trabajando con BeauDev. No solo entregaron un producto hermoso, sino que superaron nuestras expectativas en funcionalidad y rendimiento.",
+        "Increíble experiencia trabajando con ColdBlock. No solo entregaron un producto hermoso, sino que superaron nuestras expectativas en funcionalidad y rendimiento.",
       author: "Laura Fernández",
       role: "Founder, Digital Horizons",
       rating: 5,
@@ -139,10 +132,11 @@ export default function Home() {
 
   const team = [
     {
-      name: "Gagabi",
+      name: "Gabriel R.",
       role: "Full Stack Developer",
       expertise: "React, Node.js, AI Integration",
       images: [ // Array de imágenes para Gagabi
+        "/images/team/gabi.png",
         "/images/team/gagabi1.jpeg",
         "/images/team/gagabi2.jpeg",
         "/images/team/gagabi3.jpeg",
@@ -150,10 +144,11 @@ export default function Home() {
       ],
     },
     {
-      name: "German Estorbar",
+      name: "German E.",
       role: "UX/UI Designer",
       expertise: "Figma, Branding, User Research",
       images: [ // Array de imágenes para German
+        "/images/team/german.png",
         "/images/team/german1.jpeg",
         "/images/team/german2.jpeg",
         "/images/team/german3.jpeg",
@@ -161,10 +156,11 @@ export default function Home() {
       ],
     },
     {
-      name: "Paul",
+      name: "Emiliano P.",
       role: "Backend Specialist",
       expertise: "Python, Flask, Computer Vision",
       images: [ // Array de imágenes para Paul
+        "/images/team/emi.png",
         "/images/team/paul1.jpeg",
         "/images/team/paul2.jpeg",
         "/images/team/paul3.jpeg",
@@ -225,8 +221,8 @@ export default function Home() {
     }
   }
 
-  // Componente de carrusel simplificado sin flechas
-  const TeamMemberCarousel = ({
+  // Componente de imagen simple (sin carrusel)
+  const TeamMemberImage = ({
     images,
     name,
     role
@@ -235,76 +231,40 @@ export default function Home() {
     name: string,
     role: string
   }) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [imageLoading, setImageLoading] = useState(true);
 
-    useEffect(() => {
-      if (images.length <= 1) return;
-
-      const interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) =>
-          prevIndex === images.length - 1 ? 0 : prevIndex + 1
-        );
-      }, 3500); // Cambia cada 3.5 segundos
-
-      return () => clearInterval(interval);
-    }, [images.length]);
-
-    // Solo mostrar controles si hay más de una imagen
-    const showControls = images.length > 1;
+    // Solo usar la primera imagen
+    const firstImage = images && images.length > 0 ? images[0] : null;
 
     return (
-      <div className="relative w-full h-full bg-beaudev-dark">
-        {images.map((image, index) => (
-          <div
-            key={image}
-            className={`absolute inset-0 transition-opacity duration-1000 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-          >
-            <div className="w-full h-full flex items-center justify-center p-4">
+      <div className="relative w-full">
+        {firstImage ? (
+          <div className="relative w-full">
+            <div className="relative w-full h-auto">
               <Image
-                src={withBasePath(image)}
-                alt={`Foto de ${name} - ${role} ${index + 1}`}
-                width={320}
-                height={400}
-                className={`max-w-[90%] max-h-[90%] w-auto h-auto object-scale-down transition-all duration-500 ${imageLoading ? 'opacity-0' : 'opacity-100'
+                src={withBasePath(firstImage)}
+                alt={`Foto de ${name} - ${role}`}
+                width={400}
+                height={500}
+                className={`w-full h-auto object-cover transition-all duration-500 ${imageLoading ? 'opacity-0' : 'opacity-100'
                   }`}
                 onLoad={() => setImageLoading(false)}
-                priority={index === 0}
-                style={{
-                  maxWidth: 'min(100%, 320px)',
-                  maxHeight: 'min(100%, 400px)'
-                }}
+                priority={true}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
 
-            {/* Spinner de carga solo para la imagen actual */}
-            {imageLoading && index === currentImageIndex && (
+            {/* Spinner de carga */}
+            {imageLoading && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 border-2 border-beaudev-gold/30 border-t-beaudev-gold rounded-full animate-spin"></div>
+                <div className="w-8 h-8 border-2 border-ColdBlock-gold/30 border-t-ColdBlock-gold rounded-full animate-spin"></div>
               </div>
             )}
           </div>
-        ))}
-
-        {/* Solo indicadores de puntos - sin flechas */}
-        {showControls && (
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-            {images.map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentImageIndex
-                  ? 'bg-beaudev-gold scale-125'
-                  : 'bg-beaudev-gold/40'
-                  }`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImageIndex(index);
-                  setImageLoading(true);
-                }}
-                aria-label={`Ver foto ${index + 1} de ${images.length}`}
-              />
-            ))}
+        ) : (
+          <div className="w-full py-16 text-center bg-ColdBlock-dark">
+            <Users className="w-24 h-24 text-ColdBlock-gold/30 mx-auto mb-4" />
+            <p className="text-ColdBlock-gold/50 text-sm font-medium">Foto próximamente</p>
           </div>
         )}
       </div>
@@ -368,15 +328,15 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-beaudev-dark">
+    <main className="min-h-screen bg-ColdBlock-dark">
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
         {/* Large logo as background */}
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
           <div className="relative w-[600px] h-[600px] md:w-[800px] md:h-[800px] lg:w-[1000px] lg:h-[1000px]">
             <Image
-              src={withBasePath("/images/design-mode/logo.png")}
-              alt="BeauDev - Logo con rostro minimalista en líneas doradas sobre fondo negro"
+              src={withBasePath("/images/design-mode/cblogo.png")}
+              alt="ColdBlock - Logo del vaso con hielo"
               fill
               className="object-contain"
               priority
@@ -384,7 +344,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-beaudev-gold/5 via-transparent to-transparent opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-gold/5 via-transparent to-transparent opacity-50" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -399,16 +359,16 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-beaudev-gold-soft mb-6 text-balance"
+            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-ColdBlock-gold-soft mb-6 text-balance"
           >
-            Belleza y tecnología en cada línea de código
+            Donde el código se convierte en diseño
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-xl md:text-2xl text-beaudev-text-light mb-12 text-pretty max-w-3xl leading-relaxed"
+            className="text-xl md:text-2xl text-ColdBlock-text-light mb-12 text-pretty max-w-3xl leading-relaxed"
           >
             Creamos experiencias digitales únicas, precisas y visualmente armoniosas
           </motion.p>
@@ -420,7 +380,7 @@ export default function Home() {
           >
             <Button
               size="lg"
-              className="bg-transparent border-2 border-beaudev-gold hover:bg-beaudev-gold hover:text-beaudev-dark text-beaudev-gold transition-all duration-300 text-lg px-8 py-6"
+              className="bg-transparent border-2 border-ColdBlock-gold hover:bg-ColdBlock-gold hover:text-ColdBlock-dark text-ColdBlock-gold transition-all duration-300 text-lg px-8 py-6"
               onClick={() => {
                 const contactSection = document.getElementById("contact")
                 contactSection?.scrollIntoView({ behavior: "smooth" })
@@ -433,24 +393,25 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* About Section */}
-      <section className="py-32 px-4 bg-beaudev-dark-elevated">
-        <div className="max-w-6xl mx-auto">
+      {/* Philosophy Section */}
+      <section className="py-32 px-4 relative overflow-hidden">
+        <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-20"
+            className="text-center mb-24"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-beaudev-gold mb-8">Nuestra Filosofía</h2>
-            <p className="text-xl md:text-2xl text-beaudev-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
-              Cada proyecto es una obra visual y funcional. Creemos que la belleza no está solo en el diseño, sino en
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-10" />
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-10">Nuestra Filosofía</h2>
+            <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-4xl mx-auto text-pretty">
+              Cada proyecto es una obra visual y funcional. Creemos que la elegancia no está solo en el diseño, sino en
               cómo se siente usar lo que creamos.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {philosophy.map((item, index) => (
               <motion.div
                 key={item.label}
@@ -458,14 +419,221 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center group"
+                className="relative group"
               >
-                <div className="w-24 h-24 rounded-full border-2 border-beaudev-gold/30 flex items-center justify-center mb-6 group-hover:border-beaudev-gold group-hover:scale-110 transition-all duration-300">
-                  <item.icon className="w-12 h-12 text-beaudev-gold" />
+                <div className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/80 to-ColdBlock-dark/80 backdrop-blur-sm border-2 border-ColdBlock-gold/20 rounded-2xl p-8 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-ColdBlock-gold/20 group-hover:-translate-y-2">
+                  <div className="flex flex-col items-center text-center">
+                    {/* Icon container with pulse effect */}
+                    <div className="relative w-28 h-28 mb-6">
+                      <div className="absolute inset-0 bg-ColdBlock-gold/10 rounded-full group-hover:animate-pulse" />
+                      <div className="absolute inset-2 bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 rounded-full border-2 border-ColdBlock-gold/40 group-hover:border-ColdBlock-gold group-hover:scale-110 transition-all duration-500 flex items-center justify-center">
+                        <item.icon className="w-14 h-14 text-ColdBlock-gold group-hover:scale-110 transition-transform duration-300" />
+                      </div>
+                    </div>
+
+                    <h3 className="text-ColdBlock-gold font-serif text-2xl font-bold mb-3">{item.label}</h3>
+
+                    {/* Decorative underline */}
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-ColdBlock-gold/50 to-transparent group-hover:via-ColdBlock-gold transition-all duration-300" />
+                  </div>
                 </div>
-                <p className="text-beaudev-gold-soft font-serif text-xl font-semibold">{item.label}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How We Work Section */}
+      <section className="py-32 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-dark via-ColdBlock-dark-elevated to-ColdBlock-dark opacity-50"></div>
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-24"
+          >
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-8"></div>
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Cómo Trabajamos</h2>
+            <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
+              Transformamos ideas en realidad digital con un proceso claro y probado
+            </p>
+          </motion.div>
+
+          <div className="relative">
+            {/* Timeline connector line for desktop */}
+            <div className="hidden lg:block absolute top-32 left-0 right-0 h-0.5 bg-gradient-to-r from-ColdBlock-gold/20 via-ColdBlock-gold/50 to-ColdBlock-gold/20"></div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {/* Step 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  {/* Hover glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="relative z-10">
+                    {/* Icon with animated ring */}
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
+                      <Eye className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    </div>
+
+                    {/* Step number with better styling */}
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                        PASO 1
+                      </div>
+                    </div>
+
+                    {/* Title with gradient underline */}
+                    <div className="mb-4">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">
+                        Investigación y Planificación
+                      </h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                    </div>
+
+                    {/* Description with better spacing */}
+                    <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
+                      Comenzamos entendiendo tu negocio, objetivos y audiencia. Creamos una hoja de ruta clara adaptada
+                      desde el primer día.
+                    </p>
+                  </div>
+                </Card>
+
+                {/* Arrow connector with pulse animation */}
+                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-gold/20">
+                  <ArrowRight className="w-5 h-5 text-ColdBlock-gold animate-pulse" />
+                </div>
+              </motion.div>
+
+              {/* Step 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="relative z-10">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
+                      <Palette className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    </div>
+
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                        PASO 2
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">
+                        Soluciones Creativas
+                      </h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                    </div>
+
+                    <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
+                      Desde wireframes hasta diseño visual, construimos mockups que reflejan tu marca y combinan
+                      creatividad con funcionalidad.
+                    </p>
+                  </div>
+                </Card>
+
+                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-gold/20">
+                  <ArrowRight className="w-5 h-5 text-ColdBlock-gold animate-pulse" />
+                </div>
+              </motion.div>
+
+              {/* Step 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="relative"
+              >
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="relative z-10">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
+                      <Code2 className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    </div>
+
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                        PASO 3
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">Desarrollo</h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                    </div>
+
+                    <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
+                      Damos vida a tu proyecto con código limpio y escalable. Construcciones rápidas, seguras y
+                      preparadas para el futuro.
+                    </p>
+                  </div>
+                </Card>
+
+                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-gold/20">
+                  <ArrowRight className="w-5 h-5 text-ColdBlock-gold animate-pulse" />
+                </div>
+              </motion.div>
+
+              {/* Step 4 */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                  <div className="relative z-10">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
+                      <Rocket className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    </div>
+
+                    <div className="flex items-center justify-center mb-6">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                        PASO 4
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">
+                        Lanzamiento y Soporte
+                      </h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                    </div>
+
+                    <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
+                      Una vez en vivo, nos aseguramos de que todo funcione perfectamente. Optimización del rendimiento y
+                      soporte continuo.
+                    </p>
+                  </div>
+                </Card>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -480,8 +648,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-beaudev-gold mb-8">Nuestros Servicios</h2>
-            <p className="text-xl md:text-2xl text-beaudev-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Nuestros Servicios</h2>
+            <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Soluciones integrales que fusionan diseño excepcional con código impecable
             </p>
           </motion.div>
@@ -495,14 +663,14 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="bg-beaudev-dark border-2 border-beaudev-gold/20 hover:border-beaudev-gold transition-all duration-300 p-10 h-full group hover:shadow-lg hover:shadow-beaudev-gold/10">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-beaudev-gold/10 mb-8 group-hover:bg-beaudev-gold/20 transition-colors">
-                    <service.icon className="w-8 h-8 text-beaudev-gold" />
+                <Card className="bg-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold transition-all duration-300 p-10 h-full group hover:shadow-lg hover:shadow-ColdBlock-gold/10">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-ColdBlock-gold/10 mb-8 group-hover:bg-ColdBlock-gold/20 transition-colors">
+                    <service.icon className="w-8 h-8 text-ColdBlock-gold" />
                   </div>
-                  <h3 className="font-serif text-2xl font-bold text-beaudev-gold-soft mb-5 leading-tight">
+                  <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold-soft mb-5 leading-tight">
                     {service.title}
                   </h3>
-                  <p className="text-beaudev-text-light leading-relaxed text-base">{service.description}</p>
+                  <p className="text-ColdBlock-text-light leading-relaxed text-base">{service.description}</p>
                 </Card>
               </motion.div>
             ))}
@@ -511,7 +679,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section className="py-32 px-4 bg-beaudev-dark-elevated">
+      <section className="py-32 px-4 bg-ColdBlock-dark-elevated">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -520,8 +688,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-beaudev-gold mb-8">Proyectos Destacados</h2>
-            <p className="text-xl md:text-2xl text-beaudev-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Proyectos Destacados</h2>
+            <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Soluciones que combinan innovación técnica con excelencia visual
             </p>
           </motion.div>
@@ -535,12 +703,12 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
               >
-                <Card className="bg-beaudev-dark border-2 border-beaudev-gold/20 hover:border-beaudev-gold transition-all duration-500 overflow-hidden group">
+                <Card className="bg-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold transition-all duration-500 overflow-hidden group">
                   <div className="p-8 md:p-12 lg:p-16">
                     {/* Logo Section - Much better visibility */}
                     <div className="flex flex-col items-center mb-12">
-                      <div className="inline-block px-4 py-2 bg-beaudev-gold/10 border border-beaudev-gold/30 rounded-full mb-8">
-                        <p className="text-beaudev-gold text-sm font-semibold tracking-wide">{project.category}</p>
+                      <div className="inline-block px-4 py-2 bg-ColdBlock-gold/10 border border-ColdBlock-gold/30 rounded-full mb-8">
+                        <p className="text-ColdBlock-gold text-sm font-semibold tracking-wide">{project.category}</p>
                       </div>
 
                       {/* Larger logo with better contrast background */}
@@ -553,10 +721,10 @@ export default function Home() {
                         />
                       </div>
 
-                      <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-beaudev-gold-soft mb-6 text-center">
+                      <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-ColdBlock-gold-soft mb-6 text-center">
                         {project.title}
                       </h3>
-                      <p className="text-beaudev-text-light text-lg md:text-xl leading-relaxed mb-10 max-w-3xl text-center">
+                      <p className="text-ColdBlock-text-light text-lg md:text-xl leading-relaxed mb-10 max-w-3xl text-center">
                         {project.description}
                       </p>
                     </div>
@@ -565,7 +733,7 @@ export default function Home() {
                     <div className="grid md:grid-cols-2 gap-10 mb-10">
                       {/* Technologies */}
                       <div>
-                        <h4 className="text-beaudev-gold text-xl font-bold mb-6 flex items-center">
+                        <h4 className="text-ColdBlock-gold text-xl font-bold mb-6 flex items-center">
                           <Code2 className="w-6 h-6 mr-3" />
                           Stack Tecnológico
                         </h4>
@@ -573,7 +741,7 @@ export default function Home() {
                           {project.technologies.map((tech) => (
                             <span
                               key={tech}
-                              className="px-5 py-3 bg-beaudev-gold/10 border border-beaudev-gold/30 text-beaudev-gold-soft font-medium rounded-lg hover:bg-beaudev-gold/20 transition-colors text-base"
+                              className="px-5 py-3 bg-ColdBlock-gold/10 border border-ColdBlock-gold/30 text-ColdBlock-gold-soft font-medium rounded-lg hover:bg-ColdBlock-gold/20 transition-colors text-base"
                             >
                               {tech}
                             </span>
@@ -583,14 +751,14 @@ export default function Home() {
 
                       {/* Highlights */}
                       <div>
-                        <h4 className="text-beaudev-gold text-xl font-bold mb-6 flex items-center">
+                        <h4 className="text-ColdBlock-gold text-xl font-bold mb-6 flex items-center">
                           <Sparkles className="w-6 h-6 mr-3" />
                           Características Clave
                         </h4>
                         <ul className="space-y-4">
                           {project.highlights.map((highlight) => (
-                            <li key={highlight} className="text-beaudev-text-light flex items-start text-base">
-                              <span className="text-beaudev-gold mr-3 mt-1 flex-shrink-0 text-xl">▸</span>
+                            <li key={highlight} className="text-ColdBlock-text-light flex items-start text-base">
+                              <span className="text-ColdBlock-gold mr-3 mt-1 flex-shrink-0 text-xl">▸</span>
                               <span>{highlight}</span>
                             </li>
                           ))}
@@ -605,7 +773,7 @@ export default function Home() {
                           <Button
                             variant="outline"
                             size="lg"
-                            className="border-2 border-beaudev-gold text-beaudev-gold hover:bg-beaudev-gold hover:text-beaudev-dark transition-all duration-300 bg-transparent text-lg px-8 py-6 group"
+                            className="border-2 border-ColdBlock-gold text-ColdBlock-gold hover:bg-ColdBlock-gold hover:text-ColdBlock-dark transition-all duration-300 bg-transparent text-lg px-8 py-6 group"
                           >
                             Visitar sitio web
                             <ExternalLink className="ml-3 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -615,7 +783,7 @@ export default function Home() {
                         <Button
                           variant="outline"
                           size="lg"
-                          className="border-2 border-beaudev-gold/30 text-beaudev-gold/50 cursor-not-allowed bg-transparent text-lg px-8 py-6"
+                          className="border-2 border-ColdBlock-gold/30 text-ColdBlock-gold/50 cursor-not-allowed bg-transparent text-lg px-8 py-6"
                           disabled
                         >
                           Proyecto privado
@@ -640,13 +808,13 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-beaudev-gold mb-8">Nuestro Equipo</h2>
-            <p className="text-xl md:text-2xl text-beaudev-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Nuestro Equipo</h2>
+            <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Profesionales apasionados por crear soluciones elegantes y funcionales
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {team.map((member, index) => (
               <motion.div
                 key={member.name}
@@ -655,39 +823,43 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
-                <Card className="bg-beaudev-dark border-2 border-beaudev-gold/20 hover:border-beaudev-gold transition-all duration-300 overflow-hidden group">
-                  {/* Carrusel para todos los miembros */}
-                  <div className="relative w-full h-80 border-b-2 border-beaudev-gold/20 overflow-hidden flex items-center justify-center bg-beaudev-dark">
+                <Card className="bg-ColdBlock-dark border-4 border-ColdBlock-gold/30 hover:border-ColdBlock-gold transition-all duration-300 overflow-hidden group flex flex-col h-full">
+                  {/* Imagen simple para todos los miembros - Contenedor sin fondo */}
+                  <div className="flex-grow-0 flex-shrink-0 w-full">
                     {member.images && member.images.length > 0 ? (
-                      <TeamMemberCarousel
+                      <TeamMemberImage
                         images={member.images}
                         name={member.name}
                         role={member.role}
                       />
                     ) : (
-                      <div className="text-center p-8">
-                        <Users className="w-24 h-24 text-beaudev-gold/30 mx-auto mb-4" />
-                        <p className="text-beaudev-gold/50 text-sm font-medium">Foto próximamente</p>
+                      <div className="w-full py-16 text-center bg-ColdBlock-dark">
+                        <Users className="w-24 h-24 text-ColdBlock-gold/30 mx-auto mb-4" />
+                        <p className="text-ColdBlock-gold/50 text-sm font-medium">Foto próximamente</p>
                       </div>
                     )}
                   </div>
 
-                  <div className="p-8">
-                    <h3 className="font-serif text-2xl font-bold text-beaudev-gold-soft mb-2">{member.name}</h3>
-                    <p className="text-beaudev-gold text-lg mb-4 font-medium">{member.role}</p>
-                    <p className="text-beaudev-text-light/70 text-sm leading-relaxed">{member.expertise}</p>
+                  {/* Información del miembro - Ocupa el espacio restante */}
+                  <div className="flex-grow p-6 flex flex-col bg-ColdBlock-dark">
+                    <div className="mb-4">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold-soft mb-2">{member.name}</h3>
+                      <p className="text-ColdBlock-gold text-lg font-medium">{member.role}</p>
+                    </div>
 
-                    {/* Indicador de múltiples imágenes */}
-                    {member.images && member.images.length > 1 && (
-                      <div className="mt-3 flex items-center justify-center">
-                        <div className="flex items-center space-x-1 bg-beaudev-gold/10 px-3 py-1 rounded-full">
-                          <Sparkles className="w-3 h-3 text-beaudev-gold" />
-                          <span className="text-beaudev-gold text-xs font-medium">
-                            {member.images.length} fotos
-                          </span>
-                        </div>
+                    <div className="mb-4 flex-grow">
+                      <p className="text-ColdBlock-text-light/70 text-sm leading-relaxed">{member.expertise}</p>
+                    </div>
+
+                    {/* Espacio flexible para mantener la consistencia */}
+                    <div className="flex-grow"></div>
+
+                    {/* Línea decorativa opcional */}
+                    <div className="mt-4 pt-4 border-t border-ColdBlock-gold/10">
+                      <div className="flex items-center justify-center">
+                        <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-ColdBlock-gold/50 to-transparent"></div>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </Card>
               </motion.div>
@@ -697,14 +869,14 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 px-4 bg-beaudev-dark-elevated">
+      <section className="py-32 px-4 bg-ColdBlock-dark-elevated">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-serif text-5xl md:text-7xl font-bold text-beaudev-gold text-center mb-20"
+            className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold text-center mb-20"
           >
             Lo que dicen nuestros clientes
           </motion.h2>
@@ -718,27 +890,27 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
-                <Card className="bg-gradient-to-br from-beaudev-dark to-beaudev-dark-elevated border-2 border-beaudev-gold/30 hover:border-beaudev-gold p-8 h-full transition-all duration-300 hover:shadow-xl hover:shadow-beaudev-gold/20 group backdrop-blur-sm">
+                <Card className="bg-gradient-to-br from-ColdBlock-dark to-ColdBlock-dark-elevated border-2 border-ColdBlock-gold/30 hover:border-ColdBlock-gold p-8 h-full transition-all duration-300 hover:shadow-xl hover:shadow-ColdBlock-gold/20 group backdrop-blur-sm">
                   {/* Header with avatar placeholder and name */}
                   <div className="flex items-start gap-4 mb-5">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-beaudev-gold to-beaudev-gold-soft flex items-center justify-center flex-shrink-0 text-beaudev-dark font-bold text-xl shadow-lg">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-ColdBlock-gold to-ColdBlock-gold-soft flex items-center justify-center flex-shrink-0 text-ColdBlock-dark font-bold text-xl shadow-lg">
                       {testimonial.author.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-beaudev-gold-soft text-lg mb-1">{testimonial.author}</h4>
-                      <p className="text-beaudev-text-light/70 text-sm truncate">{testimonial.role}</p>
+                      <h4 className="font-bold text-ColdBlock-gold-soft text-lg mb-1">{testimonial.author}</h4>
+                      <p className="text-ColdBlock-text-light/70 text-sm truncate">{testimonial.role}</p>
                     </div>
                   </div>
 
                   {/* Star rating */}
                   <div className="flex gap-1 mb-5">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-beaudev-gold text-beaudev-gold" />
+                      <Star key={i} className="w-5 h-5 fill-ColdBlock-gold text-ColdBlock-gold" />
                     ))}
                   </div>
 
                   {/* Review text */}
-                  <p className="text-beaudev-text-light leading-relaxed text-base">{testimonial.quote}</p>
+                  <p className="text-ColdBlock-text-light leading-relaxed text-base">{testimonial.quote}</p>
                 </Card>
               </motion.div>
             ))}
@@ -746,21 +918,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-32 px-4">
-        <div className="max-w-3xl mx-auto">
+      {/* Contact Section - Hablar con ColdBlock */}
+      <section id="contact" className="py-32 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-dark via-ColdBlock-dark-elevated/50 to-ColdBlock-dark pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-ColdBlock-gold/10 rounded-full blur-[128px] animate-pulse pointer-events-none" />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-ColdBlock-gold/5 rounded-full blur-[128px] animate-pulse pointer-events-none"
+          style={{ animationDelay: "1s" }}
+        />
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-beaudev-gold mb-8 text-balance">
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-10" />
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8 text-balance">
               Llevemos la belleza al código
             </h2>
-            <p className="text-xl md:text-2xl text-beaudev-text-light leading-relaxed">
-              Comencemos a crear algo extraordinario juntos
+            <p className="text-xl md:text-2xl text-ColdBlock-text-light/80 leading-relaxed max-w-3xl mx-auto">
+              Comencemos a crear algo extraordinario juntos. Completa el formulario y te responderemos en menos de 24
+              horas.
             </p>
           </motion.div>
 
@@ -769,102 +950,186 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative group"
           >
-            <Card className="bg-beaudev-dark border-2 border-beaudev-gold/30 p-10 md:p-14">
-              <form onSubmit={handleSubmit} className="space-y-8">
-                <div>
-                  <label htmlFor="name" className="block text-beaudev-gold-soft mb-3 font-medium text-lg">
+            {/* Outer glow effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-ColdBlock-gold/20 via-ColdBlock-gold/10 to-ColdBlock-gold/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+
+            <Card className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/95 via-ColdBlock-dark/95 to-ColdBlock-dark-elevated/95 backdrop-blur-xl border-2 border-ColdBlock-gold/30 hover:border-ColdBlock-gold/60 transition-all duration-700 p-12 md:p-20 shadow-2xl shadow-ColdBlock-gold/10 rounded-3xl">
+              <form onSubmit={handleSubmit} className="space-y-12">
+                <div className="group/field">
+                  <label htmlFor="name" className="flex items-center gap-3 text-ColdBlock-gold mb-4 font-bold text-xl">
+                    <div className="w-10 h-10 rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors">
+                      <User className="w-5 h-5" />
+                    </div>
                     Tu nombre completo
                   </label>
-                  <p className="text-beaudev-text-light/60 text-sm mb-3">¿Cómo debemos llamarte?</p>
+                  <p className="text-ColdBlock-text-light/60 text-sm mb-5 ml-13 leading-relaxed">
+                    ¿Cómo debemos llamarte?
+                  </p>
                   <input
                     type="text"
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Ej: María González"
-                    className="w-full bg-beaudev-dark-elevated border-2 border-beaudev-gold/20 focus:border-beaudev-gold text-beaudev-text-light px-5 py-4 rounded-lg transition-colors outline-none text-lg placeholder:text-beaudev-text-light/30"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-7 py-5 rounded-2xl transition-all duration-300 outline-none text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="email" className="block text-beaudev-gold-soft mb-3 font-medium text-lg">
+                <div className="group/field">
+                  <label htmlFor="email" className="flex items-center gap-3 text-ColdBlock-gold mb-4 font-bold text-xl">
+                    <div className="w-10 h-10 rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors">
+                      <Mail className="w-5 h-5" />
+                    </div>
                     Email de contacto
                   </label>
-                  <p className="text-beaudev-text-light/60 text-sm mb-3">Te responderemos a esta dirección de correo</p>
+                  <p className="text-ColdBlock-text-light/60 text-sm mb-5 ml-13 leading-relaxed">
+                    Te responderemos a esta dirección de correo
+                  </p>
                   <input
                     type="email"
                     id="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Ej: tu@email.com"
-                    className="w-full bg-beaudev-dark-elevated border-2 border-beaudev-gold/20 focus:border-beaudev-gold text-beaudev-text-light px-5 py-4 rounded-lg transition-colors outline-none text-lg placeholder:text-beaudev-text-light/30"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-7 py-5 rounded-2xl transition-all duration-300 outline-none text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <label htmlFor="message" className="block text-beaudev-gold-soft font-medium text-lg">
+                <div className="group/field">
+                  <div className="flex items-center justify-between mb-4">
+                    <label htmlFor="message" className="flex items-center gap-3 text-ColdBlock-gold font-bold text-xl">
+                      <div className="w-10 h-10 rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors">
+                        <FileText className="w-5 h-5" />
+                      </div>
                       Cuéntanos sobre tu proyecto
                     </label>
-                    <span
-                      className={`text-sm font-medium transition-colors ${charCount > maxChars * 0.9
-                        ? "text-beaudev-gold"
-                        : charCount > maxChars * 0.7
-                          ? "text-beaudev-text-light/70"
-                          : "text-beaudev-text-light/50"
-                        }`}
-                    >
-                      {charCount}/{maxChars}
-                    </span>
+                    <div className="flex flex-col items-end gap-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-20 h-1.5 bg-ColdBlock-gold/20 rounded-full overflow-hidden">
+                          <div
+                            className={`h-full transition-all duration-300 ${charCount > maxChars * 0.9
+                                ? "bg-ColdBlock-gold"
+                                : charCount > maxChars * 0.7
+                                  ? "bg-ColdBlock-gold/70"
+                                  : "bg-ColdBlock-gold/40"
+                              }`}
+                            style={{ width: `${(charCount / maxChars) * 100}%` }}
+                          />
+                        </div>
+                        <span
+                          className={`text-sm font-bold transition-colors ${charCount > maxChars * 0.9
+                              ? "text-ColdBlock-gold"
+                              : charCount > maxChars * 0.7
+                                ? "text-ColdBlock-text-light/70"
+                                : "text-ColdBlock-text-light/50"
+                            }`}
+                        >
+                          {charCount}/{maxChars}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <p className="text-beaudev-text-light/60 text-sm mb-3">
-                    Describe tu idea, objetivos y expectativas. Cuanto más detalle nos des, mejor podremos ayudarte.
+                  <p className="text-ColdBlock-text-light/60 text-sm mb-5 ml-13 leading-relaxed">
+                    Describe tu idea, objetivos, presupuesto estimado y plazos esperados. Cuanto más detalle nos des,
+                    mejor podremos ayudarte a materializar tu visión.
                   </p>
                   <textarea
                     id="message"
                     value={formData.message}
                     onChange={handleMessageChange}
-                    rows={8}
-                    placeholder="Ej: Me gustaría crear una plataforma web moderna para mi negocio de..."
-                    className="w-full bg-beaudev-dark-elevated border-2 border-beaudev-gold/20 focus:border-beaudev-gold text-beaudev-text-light px-5 py-4 rounded-lg transition-colors outline-none resize-none text-lg leading-relaxed placeholder:text-beaudev-text-light/30"
+                    rows={12}
+                    placeholder="Ej: Me gustaría crear una plataforma web moderna para mi negocio de e-commerce. Necesito un diseño elegante, sistema de pagos integrado, y panel de administración. Mi presupuesto aproximado es de..."
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-7 py-6 rounded-2xl transition-all duration-300 outline-none resize-none text-base leading-relaxed placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
                 </div>
 
-                {/* Status messages */}
                 {submitStatus === "success" && (
-                  <div className="flex items-center gap-3 p-4 bg-green-500/10 border-2 border-green-500/30 rounded-lg">
-                    <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-                    <p className="text-green-500 font-medium">
-                      ¡Mensaje enviado! Nos pondremos en contacto contigo pronto.
-                    </p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    className="flex items-start gap-5 p-6 bg-gradient-to-br from-green-500/15 to-green-600/10 border-2 border-green-500/50 rounded-2xl shadow-lg shadow-green-500/20"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-7 h-7 text-green-400" />
+                    </div>
+                    <div>
+                      <p className="text-green-400 font-bold text-xl mb-2">¡Mensaje enviado con éxito!</p>
+                      <p className="text-green-400/80 text-sm leading-relaxed">
+                        Hemos recibido tu solicitud. Nuestro equipo revisará tu proyecto y te responderá en menos de 24
+                        horas.
+                      </p>
+                    </div>
+                  </motion.div>
                 )}
 
                 {submitStatus === "error" && (
-                  <div className="flex items-center gap-3 p-4 bg-red-500/10 border-2 border-red-500/30 rounded-lg">
-                    <AlertCircle className="w-6 h-6 text-red-500 flex-shrink-0" />
-                    <p className="text-red-500 font-medium">
-                      Hubo un error al enviar el mensaje. Por favor, intenta nuevamente.
-                    </p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    className="flex items-start gap-5 p-6 bg-gradient-to-br from-red-500/15 to-red-600/10 border-2 border-red-500/50 rounded-2xl shadow-lg shadow-red-500/20"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                      <AlertCircle className="w-7 h-7 text-red-400" />
+                    </div>
+                    <div>
+                      <p className="text-red-400 font-bold text-xl mb-2">Error al enviar el mensaje</p>
+                      <p className="text-red-400/80 text-sm leading-relaxed">
+                        Lo sentimos, hubo un problema al procesar tu solicitud. Por favor, intenta nuevamente o
+                        contáctanos directamente a gabrielrojasokk@gmail.com
+                      </p>
+                    </div>
+                  </motion.div>
                 )}
 
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-beaudev-gold hover:bg-beaudev-gold-soft text-beaudev-dark font-bold transition-all duration-300 text-lg py-7 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-gradient-to-r from-ColdBlock-gold via-ColdBlock-gold-soft to-ColdBlock-gold hover:from-ColdBlock-gold-soft hover:via-ColdBlock-gold hover:to-ColdBlock-gold-soft text-ColdBlock-dark font-black transition-all duration-500 text-xl py-8 disabled:opacity-50 disabled:cursor-not-allowed shadow-2xl shadow-ColdBlock-gold/40 hover:shadow-[0_20px_60px_rgba(212,175,55,0.6)] hover:scale-[1.02] active:scale-[0.98] rounded-2xl relative overflow-hidden group"
                   disabled={isSubmitting || charCount === 0}
                 >
-                  <Mail className="mr-3 w-6 h-6" />
-                  {isSubmitting ? "Enviando..." : "Hablar con BeauDev"}
+                  {/* Animated shine effect */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/30 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
+
+                  {/* Pulse ring effect */}
+                  <span className="absolute inset-0 rounded-2xl border-2 border-white/20 opacity-0 group-hover:opacity-100 group-hover:animate-ping" />
+
+                  <span className="relative flex items-center justify-center gap-4">
+                    {isSubmitting ? (
+                      <>
+                        <div className="w-7 h-7 border-4 border-ColdBlock-dark/30 border-t-ColdBlock-dark rounded-full animate-spin" />
+                        Enviando mensaje...
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-7 h-7" />
+                        Hablar con ColdBlock
+                        <ArrowRight className="w-7 h-7 group-hover:translate-x-2 transition-transform duration-300" />
+                      </>
+                    )}
+                  </span>
                 </Button>
+
+                <div className="text-center pt-8 border-t-2 border-ColdBlock-gold/20">
+                  <p className="text-ColdBlock-text-light/60 text-base mb-4 font-medium">
+                    ¿Prefieres contactarnos directamente?
+                  </p>
+                  <a
+                    href="mailto:gabrielrojasokk@gmail.com"
+                    className="inline-flex items-center gap-3 text-ColdBlock-gold hover:text-ColdBlock-gold-soft transition-all font-bold text-lg group/email bg-ColdBlock-gold/5 hover:bg-ColdBlock-gold/10 px-6 py-3 rounded-xl"
+                  >
+                    <Mail className="w-5 h-5" />
+                    gabrielrojasokk@gmail.com
+                    <ArrowRight className="w-5 h-5 group-hover/email:translate-x-1 transition-transform" />
+                  </a>
+                </div>
               </form>
             </Card>
           </motion.div>
@@ -912,13 +1177,13 @@ export default function Home() {
               className="text-center mt-6"
             >
               <motion.h3
-                className="font-serif text-3xl md:text-4xl font-bold text-beaudev-gold mb-4"
+                className="font-serif text-3xl md:text-4xl font-bold text-ColdBlock-gold mb-4"
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
                 ¡Mensaje Enviado!
               </motion.h3>
-              <p className="text-beaudev-text-light text-lg md:text-xl">
+              <p className="text-ColdBlock-text-light text-lg md:text-xl">
                 Nos pondremos en contacto contigo pronto
               </p>
             </motion.div>
@@ -934,9 +1199,9 @@ export default function Home() {
       />
 
       {/* Footer */}
-      <footer className="py-16 px-4 border-t border-beaudev-gold/20 bg-beaudev-dark">
+      <footer className="py-16 px-4 border-t border-ColdBlock-gold/20 bg-ColdBlock-dark">
         <div className="max-w-7xl mx-auto text-center">
-          <p className="text-beaudev-text-light/70 text-lg">© 2025 BeauDev. Belleza y tecnología en armonía.</p>
+          <p className="text-ColdBlock-text-light/70 text-lg">© 2025 ColdBlock. Belleza y tecnología en armonía.</p>
         </div>
       </footer>
     </main>

@@ -19,7 +19,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "BeauDev - Belleza y Tecnología en Código",
+  title: "ColdBlock - Belleza y Tecnología en Código",
   description:
     "Consultora de programación y diseño digital que crea páginas web con belleza, funcionalidad y armonía visual.",
   generator: "v0.app",
@@ -30,24 +30,24 @@ export const metadata: Metadata = {
     "programación",
     "consultora digital",
   ],
-  authors: [{ name: "BeauDev" }],
+  authors: [{ name: "ColdBlock" }],
 
   icons: {
     icon: [
       {
-        url: withBasePath("/images/design-mode/logo.png"),
+        url: withBasePath("/images/design-mode/cblogo.png"),
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: withBasePath("/images/design-mode/logo.png"),
+        url: withBasePath("/images/design-mode/cblogo.png"),
         media: "(prefers-color-scheme: dark)",
       },
       {
-        url: withBasePath("/images/design-mode/logo.png"),
+        url: withBasePath("/images/design-mode/cblogo.png"),
         type: "image/png",
       },
     ],
-    apple: withBasePath("/images/design-mode/logo.png"),
+    apple: withBasePath("/images/design-mode/cblogo.png"),
   },
 };
 

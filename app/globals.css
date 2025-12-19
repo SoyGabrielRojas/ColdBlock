@@ -4,13 +4,13 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* BeauDev custom color palette: black background with warm gold accents */
-  --beaudev-dark: #0b0b0b;
-  --beaudev-dark-elevated: #1a1a1a;
-  --beaudev-gold: #d4af37;
-  --beaudev-gold-soft: #f6e27f;
-  --beaudev-text-light: #eaeaea;
-  --beaudev-text-warm: #fdfbf7;
+  /* ColdBlock custom color palette: black background with warm gold accents */
+  --ColdBlock-dark: #0b0b0b;
+  --ColdBlock-dark-elevated: #1a1a1a;
+  --ColdBlock-gold: #d4af37;
+  --ColdBlock-gold-soft: #f6e27f;
+  --ColdBlock-text-light: #eaeaea;
+  --ColdBlock-text-warm: #fdfbf7;
 
   --background: #0b0b0b;
   --foreground: #eaeaea;
@@ -87,13 +87,13 @@
   --font-mono: "Geist Mono", "Geist Mono Fallback"; /* Retained from existing */
   --font-serif: var(--font-serif), "Playfair Display", serif;
 
-  /* BeauDev Color Tokens */
-  --color-beaudev-dark: var(--beaudev-dark);
-  --color-beaudev-dark-elevated: var(--beaudev-dark-elevated);
-  --color-beaudev-gold: var(--beaudev-gold);
-  --color-beaudev-gold-soft: var(--beaudev-gold-soft);
-  --color-beaudev-text-light: var(--beaudev-text-light);
-  --color-beaudev-text-warm: var(--beaudev-text-warm);
+  /* ColdBlock Color Tokens */
+  --color-ColdBlock-dark: var(--ColdBlock-dark);
+  --color-ColdBlock-dark-elevated: var(--ColdBlock-dark-elevated);
+  --color-ColdBlock-gold: var(--ColdBlock-gold);
+  --color-ColdBlock-gold-soft: var(--ColdBlock-gold-soft);
+  --color-ColdBlock-text-light: var(--ColdBlock-text-light);
+  --color-ColdBlock-text-warm: var(--ColdBlock-text-warm);
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -148,6 +148,6 @@
 
   /* Selection styling */
   ::selection {
-    @apply bg-beaudev-gold text-beaudev-dark;
+    @apply bg-ColdBlock-gold text-ColdBlock-dark;
   }
 }

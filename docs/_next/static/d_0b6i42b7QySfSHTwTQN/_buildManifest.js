@@ -3,8 +3,8 @@ self.__BUILD_MANIFEST = {
     "afterFiles": [],
     "beforeFiles": [
       {
-        "source": "/BeauDev//_next/:path+",
-        "destination": "/BeauDev/_next/:path+"
+        "source": "/ColdBlock//_next/:path+",
+        "destination": "/ColdBlock/_next/:path+"
       }
     ],
     "fallback": []

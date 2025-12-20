@@ -29,6 +29,7 @@ import {
   FileText,
   User,
   Menu,
+  X,
 } from "lucide-react";
 
 import { withBasePath } from "@/lib/publicPath";
@@ -40,6 +41,7 @@ export default function Home() {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [showCelebration, setShowCelebration] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const maxChars = 1000;
@@ -367,6 +369,7 @@ export default function Home() {
               className="flex items-center gap-3 cursor-pointer"
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
+                setIsMobileMenuOpen(false); // Cerrar menú móvil al hacer clic
               }}
             >
               <div className="relative w-10 h-10">
@@ -397,6 +400,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="text-ColdBlock-text-light hover:text-ColdBlock-blue transition-colors duration-300 text-sm font-medium relative group"
+                  onClick={() => setIsMobileMenuOpen(false)} // Cerrar menú móvil
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ColdBlock-blue group-hover:w-full transition-all duration-300" />
@@ -413,6 +417,7 @@ export default function Home() {
                   onClick={() => {
                     const contactSection = document.getElementById("contact")
                     contactSection?.scrollIntoView({ behavior: "smooth" })
+                    setIsMobileMenuOpen(false); // Cerrar menú móvil
                   }}
                 >
                   Contacto
@@ -425,10 +430,64 @@ export default function Home() {
               variant="ghost"
               size="icon"
               className="md:hidden text-ColdBlock-blue"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <Menu className="w-6 h-6" />
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </Button>
           </div>
+
+          {/* Mobile Menu Dropdown */}
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="md:hidden overflow-hidden"
+            >
+              <nav className="flex flex-col gap-4 py-6 border-t border-ColdBlock-blue/20 mt-3">
+                {[
+                  { label: 'Filosofía', href: '#philosophy' },
+                  { label: 'Servicios', href: '#services' },
+                  { label: 'Proyectos', href: '#projects' },
+                  { label: 'Equipo', href: '#team' },
+                  { label: 'Testimonios', href: '#testimonials' },
+                  { label: 'Contacto', href: '#contact' },
+                ].map((link) => (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    whileTap={{ scale: 0.95 }}
+                    className="text-ColdBlock-text-light hover:text-ColdBlock-blue transition-colors duration-300 py-2 px-4 text-lg font-medium rounded-lg hover:bg-ColdBlock-blue/10"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {link.label}
+                  </motion.a>
+                ))}
+
+                <motion.div
+                  whileTap={{ scale: 0.95 }}
+                  className="pt-4"
+                >
+                  <Button
+                    size="lg"
+                    className="w-full bg-ColdBlock-blue hover:bg-ColdBlock-blue-soft text-ColdBlock-dark font-bold"
+                    onClick={() => {
+                      const contactSection = document.getElementById("contact")
+                      contactSection?.scrollIntoView({ behavior: "smooth" })
+                      setIsMobileMenuOpen(false)
+                    }}
+                  >
+                    Hablar con ColdBlock
+                  </Button>
+                </motion.div>
+              </nav>
+            </motion.div>
+          )}
         </div>
       </motion.header>
 

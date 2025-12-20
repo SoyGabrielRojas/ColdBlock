@@ -81,6 +81,7 @@ export default function Home() {
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/tarjeta%20Cristian%20curva%20%281%29-kJqcGD3hnEzcUy1XRermWnwDzHIL34.png",
       logoAlt: "Abogados CJF - Logo institucional con letras CJF entrelazadas en oro y corona de laureles",
       link: "https://abogadoscjf.com.ar",
+      colorTheme: "gold", // Añadir esta propiedad
     },
     {
       title: "OptiScan",
@@ -94,8 +95,9 @@ export default function Home() {
         "Procesamiento local y privado",
       ],
       logo: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/optiscan%20logo-ljdcHpFsxq4a0rZ3pLEw1o9k1MWMrs.jpeg",
-      logoAlt: "OptiScan - Logo con icono de escaneo ocular en degradado azul y púrpura",
+      logoAlt: "OptiScan - Logo con icono de escaneo ocular en degradado azul y violeta",
       link: null,
+      colorTheme: "blue-violet", // Añadir esta propiedad
     },
   ]
 
@@ -142,6 +144,8 @@ export default function Home() {
         "/images/team/gagabi3.jpeg",
         "/images/team/gagabi4.jpeg",
       ],
+      // Añadir propiedad de color para la tarjeta
+      cardColor: "violet",
     },
     {
       name: "German E.",
@@ -154,6 +158,8 @@ export default function Home() {
         "/images/team/german3.jpeg",
         "/images/team/german4.jpeg",
       ],
+      // Añadir propiedad de color para la tarjeta
+      cardColor: "orange",
     },
     {
       name: "Emiliano P.",
@@ -166,6 +172,8 @@ export default function Home() {
         "/images/team/paul3.jpeg",
         "/images/team/paul4.jpeg",
       ],
+      // Añadir propiedad de color para la tarjeta
+      cardColor: "green",
     },
   ]
 
@@ -257,14 +265,14 @@ export default function Home() {
             {/* Spinner de carga */}
             {imageLoading && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-8 h-8 border-2 border-ColdBlock-gold/30 border-t-ColdBlock-gold rounded-full animate-spin"></div>
+                <div className="w-8 h-8 border-2 border-ColdBlock-blue/30 border-t-ColdBlock-blue rounded-full animate-spin"></div>
               </div>
             )}
           </div>
         ) : (
           <div className="w-full py-16 text-center bg-ColdBlock-dark">
-            <Users className="w-24 h-24 text-ColdBlock-gold/30 mx-auto mb-4" />
-            <p className="text-ColdBlock-gold/50 text-sm font-medium">Foto próximamente</p>
+            <Users className="w-24 h-24 text-ColdBlock-blue/30 mx-auto mb-4" />
+            <p className="text-ColdBlock-blue/50 text-sm font-medium">Foto próximamente</p>
           </div>
         )}
       </div>
@@ -296,7 +304,7 @@ export default function Home() {
         spread: 55,
         origin: { x: 0, y: 0.7 },
         startVelocity: randomInRange(45, 65),
-        colors: ['#D4AF37', '#FFD700', '#FFF8DC', '#F0E68C', '#B8860B']
+        colors: ['#3b82f6', '#60a5fa', '#93c5fd', '#2563eb', '#1d4ed8']
       });
 
       // Confeti desde la derecha
@@ -306,7 +314,7 @@ export default function Home() {
         spread: 55,
         origin: { x: 1, y: 0.7 },
         startVelocity: randomInRange(45, 65),
-        colors: ['#D4AF37', '#FFD700', '#FFF8DC', '#F0E68C', '#B8860B']
+        colors: ['#3b82f6', '#60a5fa', '#93c5fd', '#2563eb', '#1d4ed8']
       });
 
       // Continuar la animación
@@ -322,7 +330,7 @@ export default function Home() {
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#D4AF37', '#FFD700', '#FFF8DC', '#F0E68C', '#B8860B']
+        colors: ['#3b82f6', '#60a5fa', '#93c5fd', '#2563eb', '#1d4ed8']
       });
     }, 500);
   };
@@ -344,7 +352,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-gold/5 via-transparent to-transparent opacity-50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-blue/5 via-transparent to-transparent opacity-50" />
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -359,7 +367,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-ColdBlock-gold-soft mb-6 text-balance"
+            className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-ColdBlock-blue mb-6 text-balance"
           >
             Donde el código se convierte en diseño
           </motion.h1>
@@ -380,7 +388,7 @@ export default function Home() {
           >
             <Button
               size="lg"
-              className="bg-transparent border-2 border-ColdBlock-gold hover:bg-ColdBlock-gold hover:text-ColdBlock-dark text-ColdBlock-gold transition-all duration-300 text-lg px-8 py-6"
+              className="bg-transparent border-2 border-ColdBlock-blue hover:bg-ColdBlock-blue hover:text-ColdBlock-dark text-ColdBlock-blue transition-all duration-300 text-lg px-8 py-6"
               onClick={() => {
                 const contactSection = document.getElementById("contact")
                 contactSection?.scrollIntoView({ behavior: "smooth" })
@@ -403,8 +411,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-24"
           >
-            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-10" />
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-10">Nuestra Filosofía</h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-blue to-transparent mx-auto mb-10" />
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-blue mb-10">Nuestra Filosofía</h2>
             <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-4xl mx-auto text-pretty">
               Cada proyecto es una obra visual y funcional. Creemos que la elegancia no está solo en el diseño, sino en
               cómo se siente usar lo que creamos.
@@ -421,20 +429,20 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="relative group"
               >
-                <div className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/80 to-ColdBlock-dark/80 backdrop-blur-sm border-2 border-ColdBlock-gold/20 rounded-2xl p-8 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-ColdBlock-gold/20 group-hover:-translate-y-2">
+                <div className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/80 to-ColdBlock-dark/80 backdrop-blur-sm border-2 border-ColdBlock-blue/20 rounded-2xl p-8 transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-ColdBlock-blue/20 group-hover:-translate-y-2">
                   <div className="flex flex-col items-center text-center">
                     {/* Icon container with pulse effect */}
                     <div className="relative w-28 h-28 mb-6">
-                      <div className="absolute inset-0 bg-ColdBlock-gold/10 rounded-full group-hover:animate-pulse" />
-                      <div className="absolute inset-2 bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 rounded-full border-2 border-ColdBlock-gold/40 group-hover:border-ColdBlock-gold group-hover:scale-110 transition-all duration-500 flex items-center justify-center">
-                        <item.icon className="w-14 h-14 text-ColdBlock-gold group-hover:scale-110 transition-transform duration-300" />
+                      <div className="absolute inset-0 bg-ColdBlock-blue/10 rounded-full group-hover:animate-pulse" />
+                      <div className="absolute inset-2 bg-gradient-to-br from-ColdBlock-blue/20 to-ColdBlock-blue/5 rounded-full border-2 border-ColdBlock-blue/40 group-hover:border-ColdBlock-blue group-hover:scale-110 transition-all duration-500 flex items-center justify-center">
+                        <item.icon className="w-14 h-14 text-ColdBlock-blue group-hover:scale-110 transition-transform duration-300" />
                       </div>
                     </div>
 
-                    <h3 className="text-ColdBlock-gold font-serif text-2xl font-bold mb-3">{item.label}</h3>
+                    <h3 className="text-ColdBlock-blue font-serif text-2xl font-bold mb-3">{item.label}</h3>
 
                     {/* Decorative underline */}
-                    <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-ColdBlock-gold/50 to-transparent group-hover:via-ColdBlock-gold transition-all duration-300" />
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-transparent via-ColdBlock-blue/50 to-transparent group-hover:via-ColdBlock-blue transition-all duration-300" />
                   </div>
                 </div>
               </motion.div>
@@ -455,8 +463,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-24"
           >
-            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-8"></div>
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Cómo Trabajamos</h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-transparent via-ColdBlock-blue to-transparent mx-auto mb-8"></div>
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-blue mb-8">Cómo Trabajamos</h2>
             <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Transformamos ideas en realidad digital con un proceso claro y probado
             </p>
@@ -464,7 +472,7 @@ export default function Home() {
 
           <div className="relative">
             {/* Timeline connector line for desktop */}
-            <div className="hidden lg:block absolute top-32 left-0 right-0 h-0.5 bg-gradient-to-r from-ColdBlock-gold/20 via-ColdBlock-gold/50 to-ColdBlock-gold/20"></div>
+            <div className="hidden lg:block absolute top-32 left-0 right-0 h-0.5 bg-gradient-to-r from-ColdBlock-blue/20 via-ColdBlock-blue/50 to-ColdBlock-blue/20"></div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Step 1 */}
@@ -475,30 +483,30 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="relative"
               >
-                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-blue/20 hover:border-ColdBlock-blue hover:shadow-2xl hover:shadow-ColdBlock-blue/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
                   {/* Hover glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative z-10">
                     {/* Icon with animated ring */}
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
-                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
-                      <Eye className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-blue/20 to-ColdBlock-blue/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-blue/30 animate-pulse"></div>
+                      <Eye className="w-12 h-12 text-ColdBlock-blue relative z-10" />
                     </div>
 
                     {/* Step number with better styling */}
                     <div className="flex items-center justify-center mb-6">
-                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-blue to-ColdBlock-blue/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-blue/20">
                         PASO 1
                       </div>
                     </div>
 
                     {/* Title with gradient underline */}
                     <div className="mb-4">
-                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-blue mb-2 text-center">
                         Investigación y Planificación
                       </h3>
-                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-blue to-transparent mx-auto"></div>
                     </div>
 
                     {/* Description with better spacing */}
@@ -510,8 +518,8 @@ export default function Home() {
                 </Card>
 
                 {/* Arrow connector with pulse animation */}
-                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-gold/20">
-                  <ArrowRight className="w-5 h-5 text-ColdBlock-gold animate-pulse" />
+                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-blue/20">
+                  <ArrowRight className="w-5 h-5 text-ColdBlock-blue animate-pulse" />
                 </div>
               </motion.div>
 
@@ -523,26 +531,26 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-blue/20 hover:border-ColdBlock-blue hover:shadow-2xl hover:shadow-ColdBlock-blue/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative z-10">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
-                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
-                      <Palette className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-blue/20 to-ColdBlock-blue/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-blue/30 animate-pulse"></div>
+                      <Palette className="w-12 h-12 text-ColdBlock-blue relative z-10" />
                     </div>
 
                     <div className="flex items-center justify-center mb-6">
-                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-blue to-ColdBlock-blue/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-blue/20">
                         PASO 2
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-blue mb-2 text-center">
                         Soluciones Creativas
                       </h3>
-                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-blue to-transparent mx-auto"></div>
                     </div>
 
                     <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
@@ -552,8 +560,8 @@ export default function Home() {
                   </div>
                 </Card>
 
-                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-gold/20">
-                  <ArrowRight className="w-5 h-5 text-ColdBlock-gold animate-pulse" />
+                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-blue/20">
+                  <ArrowRight className="w-5 h-5 text-ColdBlock-blue animate-pulse" />
                 </div>
               </motion.div>
 
@@ -565,24 +573,24 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 className="relative"
               >
-                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-blue/20 hover:border-ColdBlock-blue hover:shadow-2xl hover:shadow-ColdBlock-blue/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative z-10">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
-                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
-                      <Code2 className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-blue/20 to-ColdBlock-blue/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-blue/30 animate-pulse"></div>
+                      <Code2 className="w-12 h-12 text-ColdBlock-blue relative z-10" />
                     </div>
 
                     <div className="flex items-center justify-center mb-6">
-                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-blue to-ColdBlock-blue/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-blue/20">
                         PASO 3
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">Desarrollo</h3>
-                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-blue mb-2 text-center">Desarrollo</h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-blue to-transparent mx-auto"></div>
                     </div>
 
                     <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
@@ -592,8 +600,8 @@ export default function Home() {
                   </div>
                 </Card>
 
-                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-gold/20">
-                  <ArrowRight className="w-5 h-5 text-ColdBlock-gold animate-pulse" />
+                <div className="hidden lg:flex absolute top-32 -right-4 transform -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-ColdBlock-blue/20">
+                  <ArrowRight className="w-5 h-5 text-ColdBlock-blue animate-pulse" />
                 </div>
               </motion.div>
 
@@ -604,26 +612,26 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold hover:shadow-2xl hover:shadow-ColdBlock-gold/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <Card className="bg-gradient-to-br from-ColdBlock-dark-elevated to-ColdBlock-dark border-2 border-ColdBlock-blue/20 hover:border-ColdBlock-blue hover:shadow-2xl hover:shadow-ColdBlock-blue/10 transition-all duration-500 p-8 h-full group relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-ColdBlock-blue/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
                   <div className="relative z-10">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-gold/20 to-ColdBlock-gold/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
-                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-gold/30 animate-pulse"></div>
-                      <Rocket className="w-12 h-12 text-ColdBlock-gold relative z-10" />
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ColdBlock-blue/20 to-ColdBlock-blue/5 flex items-center justify-center mb-8 mx-auto group-hover:scale-110 transition-transform duration-500 relative">
+                      <div className="absolute inset-0 rounded-full border-2 border-ColdBlock-blue/30 animate-pulse"></div>
+                      <Rocket className="w-12 h-12 text-ColdBlock-blue relative z-10" />
                     </div>
 
                     <div className="flex items-center justify-center mb-6">
-                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-gold to-ColdBlock-gold/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-gold/20">
+                      <div className="px-6 py-2 bg-gradient-to-r from-ColdBlock-blue to-ColdBlock-blue/80 text-ColdBlock-dark rounded-full font-bold text-sm tracking-wider shadow-lg shadow-ColdBlock-blue/20">
                         PASO 4
                       </div>
                     </div>
 
                     <div className="mb-4">
-                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold mb-2 text-center">
+                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-blue mb-2 text-center">
                         Lanzamiento y Soporte
                       </h3>
-                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-gold to-transparent mx-auto"></div>
+                      <div className="w-16 h-1 bg-gradient-to-r from-ColdBlock-blue to-transparent mx-auto"></div>
                     </div>
 
                     <p className="text-ColdBlock-text-light leading-relaxed text-center text-base">
@@ -648,7 +656,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Nuestros Servicios</h2>
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-blue mb-8">Nuestros Servicios</h2>
             <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Soluciones integrales que fusionan diseño excepcional con código impecable
             </p>
@@ -663,11 +671,11 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
               >
-                <Card className="bg-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold transition-all duration-300 p-10 h-full group hover:shadow-lg hover:shadow-ColdBlock-gold/10">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-ColdBlock-gold/10 mb-8 group-hover:bg-ColdBlock-gold/20 transition-colors">
-                    <service.icon className="w-8 h-8 text-ColdBlock-gold" />
+                <Card className="bg-ColdBlock-dark border-2 border-ColdBlock-blue/20 hover:border-ColdBlock-blue transition-all duration-300 p-10 h-full group hover:shadow-lg hover:shadow-ColdBlock-blue/10">
+                  <div className="flex items-center justify-center w-16 h-16 rounded-xl bg-ColdBlock-blue/10 mb-8 group-hover:bg-ColdBlock-blue/20 transition-colors">
+                    <service.icon className="w-8 h-8 text-ColdBlock-blue" />
                   </div>
-                  <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold-soft mb-5 leading-tight">
+                  <h3 className="font-serif text-2xl font-bold text-ColdBlock-blue-soft mb-5 leading-tight">
                     {service.title}
                   </h3>
                   <p className="text-ColdBlock-text-light leading-relaxed text-base">{service.description}</p>
@@ -688,7 +696,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Proyectos Destacados</h2>
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-blue mb-8">Proyectos Destacados</h2>
             <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Soluciones que combinan innovación técnica con excelencia visual
             </p>
@@ -703,15 +711,32 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
               >
-                <Card className="bg-ColdBlock-dark border-2 border-ColdBlock-gold/20 hover:border-ColdBlock-gold transition-all duration-500 overflow-hidden group">
+                <Card className={`
+            ${project.colorTheme === 'gold'
+                    ? 'bg-gradient-to-br from-amber-900/20 to-yellow-900/10 border-2 border-amber-600/30 hover:border-amber-500'
+                    : 'bg-gradient-to-br from-blue-950/40 via-indigo-950/30 to-purple-950/40 border-2 border-blue-700/30 hover:border-blue-500'
+                  } 
+            transition-all duration-500 overflow-hidden group
+          `}>
                   <div className="p-8 md:p-12 lg:p-16">
-                    {/* Logo Section - Much better visibility */}
+                    {/* Logo Section */}
                     <div className="flex flex-col items-center mb-12">
-                      <div className="inline-block px-4 py-2 bg-ColdBlock-gold/10 border border-ColdBlock-gold/30 rounded-full mb-8">
-                        <p className="text-ColdBlock-gold text-sm font-semibold tracking-wide">{project.category}</p>
+                      <div className={`
+                  inline-block px-4 py-2 rounded-full mb-8
+                  ${project.colorTheme === 'gold'
+                          ? 'bg-amber-600/20 border border-amber-500/30'
+                          : 'bg-gradient-to-r from-blue-800/30 to-purple-800/30 border border-blue-600/30'
+                        }
+                `}>
+                        <p className={`
+                    text-sm font-semibold tracking-wide
+                    ${project.colorTheme === 'gold' ? 'text-amber-300' : 'text-blue-200'}
+                  `}>
+                          {project.category}
+                        </p>
                       </div>
 
-                      {/* Larger logo with better contrast background */}
+                      {/* Logo */}
                       <div className="relative w-full max-w-3xl h-96 mb-8 flex items-center justify-center">
                         <Image
                           src={project.logo || withBasePath("/placeholder.svg")}
@@ -721,7 +746,10 @@ export default function Home() {
                         />
                       </div>
 
-                      <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-ColdBlock-gold-soft mb-6 text-center">
+                      <h3 className={`
+                  font-serif text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-center
+                  ${project.colorTheme === 'gold' ? 'text-amber-300' : 'text-blue-100'}
+                `}>
                         {project.title}
                       </h3>
                       <p className="text-ColdBlock-text-light text-lg md:text-xl leading-relaxed mb-10 max-w-3xl text-center">
@@ -733,7 +761,10 @@ export default function Home() {
                     <div className="grid md:grid-cols-2 gap-10 mb-10">
                       {/* Technologies */}
                       <div>
-                        <h4 className="text-ColdBlock-gold text-xl font-bold mb-6 flex items-center">
+                        <h4 className={`
+                    text-xl font-bold mb-6 flex items-center
+                    ${project.colorTheme === 'gold' ? 'text-amber-300' : 'text-blue-300'}
+                  `}>
                           <Code2 className="w-6 h-6 mr-3" />
                           Stack Tecnológico
                         </h4>
@@ -741,7 +772,13 @@ export default function Home() {
                           {project.technologies.map((tech) => (
                             <span
                               key={tech}
-                              className="px-5 py-3 bg-ColdBlock-gold/10 border border-ColdBlock-gold/30 text-ColdBlock-gold-soft font-medium rounded-lg hover:bg-ColdBlock-gold/20 transition-colors text-base"
+                              className={`
+                          px-5 py-3 rounded-lg font-medium transition-colors text-base
+                          ${project.colorTheme === 'gold'
+                                  ? 'bg-amber-600/20 border border-amber-500/30 text-amber-200 hover:bg-amber-600/30'
+                                  : 'bg-blue-800/20 border border-blue-700/30 text-blue-200 hover:bg-blue-800/30'
+                                }
+                        `}
                             >
                               {tech}
                             </span>
@@ -751,14 +788,22 @@ export default function Home() {
 
                       {/* Highlights */}
                       <div>
-                        <h4 className="text-ColdBlock-gold text-xl font-bold mb-6 flex items-center">
+                        <h4 className={`
+                    text-xl font-bold mb-6 flex items-center
+                    ${project.colorTheme === 'gold' ? 'text-amber-300' : 'text-blue-300'}
+                  `}>
                           <Sparkles className="w-6 h-6 mr-3" />
                           Características Clave
                         </h4>
                         <ul className="space-y-4">
                           {project.highlights.map((highlight) => (
                             <li key={highlight} className="text-ColdBlock-text-light flex items-start text-base">
-                              <span className="text-ColdBlock-gold mr-3 mt-1 flex-shrink-0 text-xl">▸</span>
+                              <span className={`
+                          mr-3 mt-1 flex-shrink-0 text-xl
+                          ${project.colorTheme === 'gold' ? 'text-amber-400' : 'text-blue-400'}
+                        `}>
+                                ▸
+                              </span>
                               <span>{highlight}</span>
                             </li>
                           ))}
@@ -773,7 +818,13 @@ export default function Home() {
                           <Button
                             variant="outline"
                             size="lg"
-                            className="border-2 border-ColdBlock-gold text-ColdBlock-gold hover:bg-ColdBlock-gold hover:text-ColdBlock-dark transition-all duration-300 bg-transparent text-lg px-8 py-6 group"
+                            className={`
+                        transition-all duration-300 bg-transparent text-lg px-8 py-6 group
+                        ${project.colorTheme === 'gold'
+                                ? 'border-2 border-amber-500 text-amber-300 hover:bg-amber-500 hover:text-ColdBlock-dark'
+                                : 'border-2 border-blue-600 text-blue-300 hover:bg-gradient-to-r hover:from-blue-700 hover:to-purple-700 hover:text-white'
+                              }
+                      `}
                           >
                             Visitar sitio web
                             <ExternalLink className="ml-3 w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -783,7 +834,13 @@ export default function Home() {
                         <Button
                           variant="outline"
                           size="lg"
-                          className="border-2 border-ColdBlock-gold/30 text-ColdBlock-gold/50 cursor-not-allowed bg-transparent text-lg px-8 py-6"
+                          className={`
+                      cursor-not-allowed bg-transparent text-lg px-8 py-6
+                      ${project.colorTheme === 'gold'
+                              ? 'border-2 border-amber-500/30 text-amber-300/50'
+                              : 'border-2 border-blue-600/30 text-blue-300/50'
+                            }
+                    `}
                           disabled
                         >
                           Proyecto privado
@@ -808,7 +865,7 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-20"
           >
-            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold mb-8">Nuestro Equipo</h2>
+            <h2 className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-blue mb-8">Nuestro Equipo</h2>
             <p className="text-xl md:text-2xl text-ColdBlock-text-light leading-relaxed max-w-3xl mx-auto text-pretty">
               Profesionales apasionados por crear soluciones elegantes y funcionales
             </p>
@@ -823,7 +880,16 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
-                <Card className="bg-ColdBlock-dark border-4 border-ColdBlock-gold/30 hover:border-ColdBlock-gold transition-all duration-300 overflow-hidden group flex flex-col h-full">
+                <Card className={`
+            bg-ColdBlock-dark border-4 transition-all duration-300 
+            overflow-hidden group flex flex-col h-full
+            ${member.cardColor === 'violet'
+                    ? 'border-violet-500/40 hover:border-violet-400'
+                    : member.cardColor === 'orange'
+                      ? 'border-orange-500/40 hover:border-orange-400'
+                      : 'border-emerald-500/40 hover:border-emerald-400'
+                  }
+          `}>
                   {/* Imagen simple para todos los miembros - Contenedor sin fondo */}
                   <div className="flex-grow-0 flex-shrink-0 w-full">
                     {member.images && member.images.length > 0 ? (
@@ -834,8 +900,8 @@ export default function Home() {
                       />
                     ) : (
                       <div className="w-full py-16 text-center bg-ColdBlock-dark">
-                        <Users className="w-24 h-24 text-ColdBlock-gold/30 mx-auto mb-4" />
-                        <p className="text-ColdBlock-gold/50 text-sm font-medium">Foto próximamente</p>
+                        <Users className="w-24 h-24 text-ColdBlock-blue/30 mx-auto mb-4" />
+                        <p className="text-ColdBlock-blue/50 text-sm font-medium">Foto próximamente</p>
                       </div>
                     )}
                   </div>
@@ -843,8 +909,28 @@ export default function Home() {
                   {/* Información del miembro - Ocupa el espacio restante */}
                   <div className="flex-grow p-6 flex flex-col bg-ColdBlock-dark">
                     <div className="mb-4">
-                      <h3 className="font-serif text-2xl font-bold text-ColdBlock-gold-soft mb-2">{member.name}</h3>
-                      <p className="text-ColdBlock-gold text-lg font-medium">{member.role}</p>
+                      <h3 className={`
+                  font-serif text-2xl font-bold mb-2
+                  ${member.cardColor === 'violet'
+                          ? 'text-violet-400'
+                          : member.cardColor === 'orange'
+                            ? 'text-orange-400'
+                            : 'text-emerald-400'
+                        }
+                `}>
+                        {member.name}
+                      </h3>
+                      <p className={`
+                  text-lg font-medium
+                  ${member.cardColor === 'violet'
+                          ? 'text-violet-300'
+                          : member.cardColor === 'orange'
+                            ? 'text-orange-300'
+                            : 'text-emerald-300'
+                        }
+                `}>
+                        {member.role}
+                      </p>
                     </div>
 
                     <div className="mb-4 flex-grow">
@@ -855,9 +941,17 @@ export default function Home() {
                     <div className="flex-grow"></div>
 
                     {/* Línea decorativa opcional */}
-                    <div className="mt-4 pt-4 border-t border-ColdBlock-gold/10">
+                    <div className="mt-4 pt-4 border-t border-ColdBlock-blue/10">
                       <div className="flex items-center justify-center">
-                        <div className="w-8 h-0.5 bg-gradient-to-r from-transparent via-ColdBlock-gold/50 to-transparent"></div>
+                        <div className={`
+                    w-8 h-0.5 bg-gradient-to-r from-transparent to-transparent
+                    ${member.cardColor === 'violet'
+                            ? 'via-violet-500/50'
+                            : member.cardColor === 'orange'
+                              ? 'via-orange-500/50'
+                              : 'via-emerald-500/50'
+                          }
+                  `}></div>
                       </div>
                     </div>
                   </div>
@@ -876,7 +970,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-gold text-center mb-20"
+            className="font-serif text-5xl md:text-7xl font-bold text-ColdBlock-blue text-center mb-20"
           >
             Lo que dicen nuestros clientes
           </motion.h2>
@@ -890,14 +984,14 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.15 }}
               >
-                <Card className="bg-gradient-to-br from-ColdBlock-dark to-ColdBlock-dark-elevated border-2 border-ColdBlock-gold/30 hover:border-ColdBlock-gold p-8 h-full transition-all duration-300 hover:shadow-xl hover:shadow-ColdBlock-gold/20 group backdrop-blur-sm">
+                <Card className="bg-gradient-to-br from-ColdBlock-dark to-ColdBlock-dark-elevated border-2 border-ColdBlock-blue/30 hover:border-ColdBlock-blue p-8 h-full transition-all duration-300 hover:shadow-xl hover:shadow-ColdBlock-blue/20 group backdrop-blur-sm">
                   {/* Header with avatar placeholder and name */}
                   <div className="flex items-start gap-4 mb-5">
-                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-ColdBlock-gold to-ColdBlock-gold-soft flex items-center justify-center flex-shrink-0 text-ColdBlock-dark font-bold text-xl shadow-lg">
+                    <div className="w-14 h-14 rounded-full bg-gradient-to-br from-ColdBlock-blue to-ColdBlock-blue-soft flex items-center justify-center flex-shrink-0 text-ColdBlock-dark font-bold text-xl shadow-lg">
                       {testimonial.author.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-ColdBlock-gold-soft text-lg mb-1">{testimonial.author}</h4>
+                      <h4 className="font-bold text-ColdBlock-blue-soft text-lg mb-1">{testimonial.author}</h4>
                       <p className="text-ColdBlock-text-light/70 text-sm truncate">{testimonial.role}</p>
                     </div>
                   </div>
@@ -905,7 +999,7 @@ export default function Home() {
                   {/* Star rating */}
                   <div className="flex gap-1 mb-5">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-ColdBlock-gold text-ColdBlock-gold" />
+                      <Star key={i} className="w-5 h-5 fill-ColdBlock-blue text-ColdBlock-blue" />
                     ))}
                   </div>
 
@@ -923,9 +1017,9 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-ColdBlock-dark via-ColdBlock-dark-elevated/50 to-ColdBlock-dark pointer-events-none" />
 
         {/* Background effects - optimizados para móvil */}
-        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-ColdBlock-gold/10 rounded-full blur-[64px] md:blur-[128px] animate-pulse pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[600px] md:h-[600px] bg-ColdBlock-blue/10 rounded-full blur-[64px] md:blur-[128px] animate-pulse pointer-events-none" />
         <div
-          className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-ColdBlock-gold/5 rounded-full blur-[64px] md:blur-[128px] animate-pulse pointer-events-none"
+          className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-ColdBlock-blue/5 rounded-full blur-[64px] md:blur-[128px] animate-pulse pointer-events-none"
           style={{ animationDelay: "1s" }}
         />
 
@@ -937,8 +1031,8 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12 md:mb-20"
           >
-            <div className="w-20 md:w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-gold to-transparent mx-auto mb-6 md:mb-10" />
-            <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl font-bold text-ColdBlock-gold mb-6 md:mb-8 text-balance px-2">
+            <div className="w-20 md:w-32 h-1 bg-gradient-to-r from-transparent via-ColdBlock-blue to-transparent mx-auto mb-6 md:mb-10" />
+            <h2 className="font-serif text-3xl md:text-5xl lg:text-7xl font-bold text-ColdBlock-blue mb-6 md:mb-8 text-balance px-2">
               Llevemos la belleza al código
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl text-ColdBlock-text-light/80 leading-relaxed max-w-3xl mx-auto px-4">
@@ -954,14 +1048,14 @@ export default function Home() {
             className="relative group"
           >
             {/* Outer glow effect - reducido para móvil */}
-            <div className="absolute -inset-0.5 md:-inset-1 bg-gradient-to-r from-ColdBlock-gold/20 via-ColdBlock-gold/10 to-ColdBlock-gold/20 rounded-2xl md:rounded-3xl blur-xl md:blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
+            <div className="absolute -inset-0.5 md:-inset-1 bg-gradient-to-r from-ColdBlock-blue/20 via-ColdBlock-blue/10 to-ColdBlock-blue/20 rounded-2xl md:rounded-3xl blur-xl md:blur-2xl opacity-0 group-hover:opacity-100 transition-all duration-700" />
 
-            <Card className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/95 via-ColdBlock-dark/95 to-ColdBlock-dark-elevated/95 backdrop-blur-xl border-2 border-ColdBlock-gold/30 hover:border-ColdBlock-gold/60 transition-all duration-700 p-6 md:p-12 lg:p-20 shadow-xl md:shadow-2xl shadow-ColdBlock-gold/10 rounded-2xl md:rounded-3xl overflow-hidden">
+            <Card className="relative bg-gradient-to-br from-ColdBlock-dark-elevated/95 via-ColdBlock-dark/95 to-ColdBlock-dark-elevated/95 backdrop-blur-xl border-2 border-ColdBlock-blue/30 hover:border-ColdBlock-blue/60 transition-all duration-700 p-6 md:p-12 lg:p-20 shadow-xl md:shadow-2xl shadow-ColdBlock-blue/10 rounded-2xl md:rounded-3xl overflow-hidden">
               <form onSubmit={handleSubmit} className="space-y-8 md:space-y-12">
                 {/* Name Field */}
                 <div className="group/field">
-                  <label htmlFor="name" className="flex items-center gap-3 text-ColdBlock-gold mb-3 md:mb-4 font-bold text-lg md:text-xl">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors flex-shrink-0">
+                  <label htmlFor="name" className="flex items-center gap-3 text-ColdBlock-blue mb-3 md:mb-4 font-bold text-lg md:text-xl">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-blue/10 flex items-center justify-center group-hover/field:bg-ColdBlock-blue/20 transition-colors flex-shrink-0">
                       <User className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                     <span className="truncate">Tu nombre completo</span>
@@ -975,7 +1069,7 @@ export default function Home() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Ej: María González"
-                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-5 rounded-xl md:rounded-2xl transition-all duration-300 outline-none text-base md:text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-blue/20 focus:border-ColdBlock-blue focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-5 rounded-xl md:rounded-2xl transition-all duration-300 outline-none text-base md:text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-blue/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
@@ -983,8 +1077,8 @@ export default function Home() {
 
                 {/* Email Field */}
                 <div className="group/field">
-                  <label htmlFor="email" className="flex items-center gap-3 text-ColdBlock-gold mb-3 md:mb-4 font-bold text-lg md:text-xl">
-                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors flex-shrink-0">
+                  <label htmlFor="email" className="flex items-center gap-3 text-ColdBlock-blue mb-3 md:mb-4 font-bold text-lg md:text-xl">
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-blue/10 flex items-center justify-center group-hover/field:bg-ColdBlock-blue/20 transition-colors flex-shrink-0">
                       <Mail className="w-4 h-4 md:w-5 md:h-5" />
                     </div>
                     <span className="truncate">Email de contacto</span>
@@ -998,7 +1092,7 @@ export default function Home() {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Ej: tu@email.com"
-                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-5 rounded-xl md:rounded-2xl transition-all duration-300 outline-none text-base md:text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-blue/20 focus:border-ColdBlock-blue focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-5 rounded-xl md:rounded-2xl transition-all duration-300 outline-none text-base md:text-lg placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-blue/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
@@ -1007,31 +1101,31 @@ export default function Home() {
                 {/* Message Field */}
                 <div className="group/field">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-3 md:mb-4 gap-2 md:gap-0">
-                    <label htmlFor="message" className="flex items-center gap-3 text-ColdBlock-gold font-bold text-lg md:text-xl">
-                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-gold/10 flex items-center justify-center group-hover/field:bg-ColdBlock-gold/20 transition-colors flex-shrink-0">
+                    <label htmlFor="message" className="flex items-center gap-3 text-ColdBlock-blue font-bold text-lg md:text-xl">
+                      <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-ColdBlock-blue/10 flex items-center justify-center group-hover/field:bg-ColdBlock-blue/20 transition-colors flex-shrink-0">
                         <FileText className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
                       <span className="truncate">Cuéntanos sobre tu proyecto</span>
                     </label>
                     <div className="flex flex-col items-end gap-2">
                       <div className="flex items-center gap-2 md:gap-3">
-                        <div className="w-16 md:w-20 h-1.5 bg-ColdBlock-gold/20 rounded-full overflow-hidden">
+                        <div className="w-16 md:w-20 h-1.5 bg-ColdBlock-blue/20 rounded-full overflow-hidden">
                           <div
                             className={`h-full transition-all duration-300 ${charCount > maxChars * 0.9
-                                ? "bg-ColdBlock-gold"
-                                : charCount > maxChars * 0.7
-                                  ? "bg-ColdBlock-gold/70"
-                                  : "bg-ColdBlock-gold/40"
+                              ? "bg-ColdBlock-blue"
+                              : charCount > maxChars * 0.7
+                                ? "bg-ColdBlock-blue/70"
+                                : "bg-ColdBlock-blue/40"
                               }`}
                             style={{ width: `${(charCount / maxChars) * 100}%` }}
                           />
                         </div>
                         <span
                           className={`text-xs md:text-sm font-bold transition-colors ${charCount > maxChars * 0.9
-                              ? "text-ColdBlock-gold"
-                              : charCount > maxChars * 0.7
-                                ? "text-ColdBlock-text-light/70"
-                                : "text-ColdBlock-text-light/50"
+                            ? "text-ColdBlock-blue"
+                            : charCount > maxChars * 0.7
+                              ? "text-ColdBlock-text-light/70"
+                              : "text-ColdBlock-text-light/50"
                             }`}
                         >
                           {charCount}/{maxChars}
@@ -1048,7 +1142,7 @@ export default function Home() {
                     onChange={handleMessageChange}
                     rows={8}
                     placeholder="Ej: Me gustaría crear una plataforma web moderna para mi negocio de e-commerce..."
-                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-gold/20 focus:border-ColdBlock-gold focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-6 rounded-xl md:rounded-2xl transition-all duration-300 outline-none resize-none text-sm md:text-base leading-relaxed placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-gold/40 shadow-inner"
+                    className="w-full bg-ColdBlock-dark/80 border-2 border-ColdBlock-blue/20 focus:border-ColdBlock-blue focus:bg-ColdBlock-dark-elevated/80 text-ColdBlock-text-light px-4 md:px-7 py-3 md:py-6 rounded-xl md:rounded-2xl transition-all duration-300 outline-none resize-none text-sm md:text-base leading-relaxed placeholder:text-ColdBlock-text-light/30 hover:border-ColdBlock-blue/40 shadow-inner"
                     required
                     disabled={isSubmitting}
                   />
@@ -1095,7 +1189,7 @@ export default function Home() {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-gradient-to-r from-ColdBlock-gold via-ColdBlock-gold-soft to-ColdBlock-gold hover:from-ColdBlock-gold-soft hover:via-ColdBlock-gold hover:to-ColdBlock-gold-soft text-ColdBlock-dark font-black transition-all duration-500 text-base md:text-xl py-6 md:py-8 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl md:shadow-2xl shadow-ColdBlock-gold/40 hover:shadow-[0_20px_60px_rgba(212,175,55,0.6)] hover:scale-[1.02] active:scale-[0.98] rounded-xl md:rounded-2xl relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-ColdBlock-blue via-ColdBlock-blue-soft to-ColdBlock-blue hover:from-ColdBlock-blue-soft hover:via-ColdBlock-blue hover:to-ColdBlock-blue-soft text-ColdBlock-dark font-black transition-all duration-500 text-base md:text-xl py-6 md:py-8 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl md:shadow-2xl shadow-ColdBlock-blue/40 hover:shadow-[0_20px_60px_rgba(59,130,246,0.6)] hover:scale-[1.02] active:scale-[0.98] rounded-xl md:rounded-2xl relative overflow-hidden group"
                   disabled={isSubmitting || charCount === 0}
                 >
                   {/* Animated shine effect */}
@@ -1166,7 +1260,7 @@ export default function Home() {
               className="text-center mt-6"
             >
               <motion.h3
-                className="font-serif text-3xl md:text-4xl font-bold text-ColdBlock-gold mb-4"
+                className="font-serif text-3xl md:text-4xl font-bold text-ColdBlock-blue mb-4"
                 animate={{ scale: [1, 1.1, 1] }}
                 transition={{ duration: 0.5, delay: 0.7 }}
               >
@@ -1188,7 +1282,7 @@ export default function Home() {
       />
 
       {/* Footer */}
-      <footer className="py-16 px-4 border-t border-ColdBlock-gold/20 bg-ColdBlock-dark">
+      <footer className="py-16 px-4 border-t border-ColdBlock-blue/20 bg-ColdBlock-dark">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-ColdBlock-text-light/70 text-lg">© 2025 ColdBlock. Belleza y tecnología en armonía.</p>
         </div>

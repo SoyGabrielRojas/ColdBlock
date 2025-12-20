@@ -4,11 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* ColdBlock custom color palette: black background with warm gold accents */
+  /* ColdBlock custom color palette: black background with blue accents */
   --ColdBlock-dark: #0b0b0b;
   --ColdBlock-dark-elevated: #1a1a1a;
-  --ColdBlock-gold: #d4af37;
-  --ColdBlock-gold-soft: #f6e27f;
+  --ColdBlock-blue: #3b82f6;
+  --ColdBlock-blue-soft: #93c5fd;
   --ColdBlock-text-light: #eaeaea;
   --ColdBlock-text-warm: #fdfbf7;
 
@@ -18,19 +18,19 @@
   --card-foreground: #eaeaea;
   --popover: #1a1a1a;
   --popover-foreground: #eaeaea;
-  --primary: #d4af37;
+  --primary: #3b82f6;
   --primary-foreground: #0b0b0b;
   --secondary: #1a1a1a;
   --secondary-foreground: #eaeaea;
   --muted: #1a1a1a;
   --muted-foreground: #888888;
-  --accent: #f6e27f;
+  --accent: #93c5fd;
   --accent-foreground: #0b0b0b;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: rgba(212, 175, 55, 0.2);
-  --input: rgba(212, 175, 55, 0.2);
-  --ring: #d4af37;
+  --border: rgba(59, 130, 246, 0.2);
+  --input: rgba(59, 130, 246, 0.2);
+  --ring: #3b82f6;
   --radius: 0.5rem;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -54,19 +54,19 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.145 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
+  --primary: #3b82f6;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
+  --accent: #93c5fd;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
   --border: oklch(0.269 0 0);
   --input: oklch(0.269 0 0);
-  --ring: oklch(0.439 0 0);
+  --ring: #3b82f6;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
@@ -90,8 +90,8 @@
   /* ColdBlock Color Tokens */
   --color-ColdBlock-dark: var(--ColdBlock-dark);
   --color-ColdBlock-dark-elevated: var(--ColdBlock-dark-elevated);
-  --color-ColdBlock-gold: var(--ColdBlock-gold);
-  --color-ColdBlock-gold-soft: var(--ColdBlock-gold-soft);
+  --color-ColdBlock-blue: var(--ColdBlock-blue);
+  --color-ColdBlock-blue-soft: var(--ColdBlock-blue-soft);
   --color-ColdBlock-text-light: var(--ColdBlock-text-light);
   --color-ColdBlock-text-warm: var(--ColdBlock-text-warm);
 
@@ -148,6 +148,16 @@
 
   /* Selection styling */
   ::selection {
-    @apply bg-ColdBlock-gold text-ColdBlock-dark;
+    @apply bg-ColdBlock-blue text-ColdBlock-dark;
+  }
+
+  @layer utilities {
+    .bg-gradient-gold {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(184, 134, 11, 0.05) 100%);
+    }
+    
+    .bg-gradient-blue-violet {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(76, 29, 149, 0.2) 100%);
+    }
   }
 }

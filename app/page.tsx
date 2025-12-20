@@ -28,6 +28,7 @@ import {
   Rocket,
   FileText,
   User,
+  Menu,
 } from "lucide-react";
 
 import { withBasePath } from "@/lib/publicPath";
@@ -38,9 +39,19 @@ export default function Home() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
   const [showCelebration, setShowCelebration] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const maxChars = 1000;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const services = [
     {
@@ -337,6 +348,90 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-ColdBlock-dark">
+      {/* Header Sticky */}
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+            ? 'bg-ColdBlock-dark/95 backdrop-blur-lg border-b border-ColdBlock-blue/20 py-3'
+            : 'bg-transparent py-5'
+          }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            {/* Logo - Ahora hace scroll al inicio */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 cursor-pointer"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <div className="relative w-10 h-10">
+                <Image
+                  src={withBasePath("/images/design-mode/cblogo.png")}
+                  alt="ColdBlock Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <span className="font-serif text-xl font-bold text-ColdBlock-blue">
+                ColdBlock
+              </span>
+            </motion.div>
+
+            {/* Navigation Links - Desktop */}
+            <nav className="hidden md:flex items-center gap-8">
+              {[
+                { label: 'Filosofía', href: '#philosophy' },
+                { label: 'Servicios', href: '#services' },
+                { label: 'Proyectos', href: '#projects' },
+                { label: 'Equipo', href: '#team' },
+                { label: 'Testimonios', href: '#testimonials' },
+              ].map((link) => (
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-ColdBlock-text-light hover:text-ColdBlock-blue transition-colors duration-300 text-sm font-medium relative group"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-ColdBlock-blue group-hover:w-full transition-all duration-300" />
+                </motion.a>
+              ))}
+
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  size="sm"
+                  className="bg-ColdBlock-blue hover:bg-ColdBlock-blue-soft text-ColdBlock-dark font-bold"
+                  onClick={() => {
+                    const contactSection = document.getElementById("contact")
+                    contactSection?.scrollIntoView({ behavior: "smooth" })
+                  }}
+                >
+                  Contacto
+                </Button>
+              </motion.div>
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-ColdBlock-blue"
+            >
+              <Menu className="w-6 h-6" />
+            </Button>
+          </div>
+        </div>
+      </motion.header>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden">
         {/* Large logo as background */}
@@ -402,7 +497,7 @@ export default function Home() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="py-32 px-4 relative overflow-hidden">
+      <section id="philosophy" className="py-32 px-4 relative overflow-hidden">
         <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -647,7 +742,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-32 px-4">
+      <section id="services" className="py-32 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -687,7 +782,7 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section className="py-32 px-4 bg-ColdBlock-dark-elevated">
+      <section id="projects" className="py-32 px-4 bg-ColdBlock-dark-elevated">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -856,7 +951,7 @@ export default function Home() {
       </section>
 
       {/* Team Section */}
-      <section className="py-32 px-4">
+      <section id="team" className="py-32 px-4">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -963,7 +1058,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-32 px-4 bg-ColdBlock-dark-elevated">
+      <section id="testimonials" className="py-32 px-4 bg-ColdBlock-dark-elevated">
         <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
